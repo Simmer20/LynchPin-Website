@@ -76,20 +76,6 @@ This keeps the website form simple while still allowing a CRM handoff behind the
 - **Headings Font:** Cormorant Garamond (serif — premium feel)
 - **Body Font:** Inter (clean, modern)
 - **Logo:** LP monogram in double-line square frame
-
----
-
-## 🔧 Recommended Next Steps
-
-1. **Add professional photo** of Hanisa Weru to replace placeholder icon in team section
-2. **Confirm company email routing** — make sure `info@lynchpinadvisory.com` is the right inbox for form notifications
-3. **Update LinkedIn URL** — confirm correct LinkedIn profile URL for Hanisa Weru
-4. **Add case studies/portfolio** page with real project examples
-5. **Blog/Insights page** — expand thought leadership content with full articles
-6. **Google Analytics** integration for tracking LinkedIn click-through traffic
-7. **Add company logo image** file to replace CSS-generated logo mark
-8. **SEO optimization** — add Open Graph meta tags for LinkedIn link previews
-
 ---
 
 ## 📁 File Structure
