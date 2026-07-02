@@ -162,6 +162,83 @@ document.addEventListener('DOMContentLoaded', () => {
   counters.forEach(el => counterObserver.observe(el));
 
 
+  /* ---- Founder photo slider (Services page) ---- */
+  const founderSliders = document.querySelectorAll('.founder-slider');
+
+  founderSliders.forEach((slider) => {
+    const slides = slider.querySelectorAll('.founder-slide');
+    const dots = slider.querySelectorAll('.founder-dot');
+    const prevBtn = slider.querySelector('.founder-slider-btn.prev');
+    const nextBtn = slider.querySelector('.founder-slider-btn.next');
+
+    if (!slides.length) return;
+
+    let currentIndex = 0;
+    let autoplayTimer = null;
+    const autoplayEnabled = slider.dataset.autoplay === 'true';
+    const interval = Number(slider.dataset.interval) || 4500;
+
+    const setSlide = (index) => {
+      currentIndex = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle('active', slideIndex === currentIndex);
+      });
+
+      dots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === currentIndex;
+        dot.classList.toggle('active', isActive);
+        dot.setAttribute('aria-selected', String(isActive));
+      });
+    };
+
+    const stopAutoplay = () => {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    };
+
+    const startAutoplay = () => {
+      if (!autoplayEnabled || slides.length < 2) return;
+      stopAutoplay();
+      autoplayTimer = setInterval(() => setSlide(currentIndex + 1), interval);
+    };
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        setSlide(currentIndex - 1);
+        startAutoplay();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        setSlide(currentIndex + 1);
+        startAutoplay();
+      });
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const nextIndex = Number(dot.dataset.slide);
+        if (!Number.isNaN(nextIndex)) {
+          setSlide(nextIndex);
+          startAutoplay();
+        }
+      });
+    });
+
+    slider.addEventListener('mouseenter', stopAutoplay);
+    slider.addEventListener('mouseleave', startAutoplay);
+    slider.addEventListener('focusin', stopAutoplay);
+    slider.addEventListener('focusout', startAutoplay);
+
+    setSlide(0);
+    startAutoplay();
+  });
+
+
   /* ---- Contact form submission ---- */
   const form    = document.getElementById('contactForm');
   const success = document.getElementById('formSuccess');

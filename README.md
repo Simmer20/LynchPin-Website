@@ -47,7 +47,8 @@ The contact form posts to `api/contact.php`, a lightweight PHP endpoint that:
 - validates required fields
 - blocks simple bot submissions with a honeypot field
 - stores leads in `data/contact_submissions.jsonl`
-- can email a lead when `CONTACT_TO_EMAIL` is configured
+- emails each lead to `info@lynchpinadvisory.com` by default
+- can use a different recipient when `CONTACT_TO_EMAIL` is configured
 - can forward leads to a CRM or automation tool when `CONTACT_WEBHOOK_URL` is configured
 
 Good lightweight CRM destinations for the webhook are HubSpot Forms, Airtable, Google Sheets via Apps Script, Make, or Zapier.
@@ -81,7 +82,7 @@ This keeps the website form simple while still allowing a CRM handoff behind the
 ## 🔧 Recommended Next Steps
 
 1. **Add professional photo** of Hanisa Weru to replace placeholder icon in team section
-2. **Add real company email** — update `mailto:info@lynchpinadvisory.com` in footer and contact section
+2. **Confirm company email routing** — make sure `info@lynchpinadvisory.com` is the right inbox for form notifications
 3. **Update LinkedIn URL** — confirm correct LinkedIn profile URL for Hanisa Weru
 4. **Add case studies/portfolio** page with real project examples
 5. **Blog/Insights page** — expand thought leadership content with full articles

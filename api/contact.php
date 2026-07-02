@@ -70,7 +70,7 @@ if ($stored === false) {
     exit;
 }
 
-$toEmail = getenv('CONTACT_TO_EMAIL') ?: '';
+$toEmail = getenv('CONTACT_TO_EMAIL') ?: 'info@lynchpinadvisory.com';
 if ($toEmail !== '') {
     $subject = 'New LynchPin website inquiry';
     $body = "Name: {$firstName} {$lastName}\n"
