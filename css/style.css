@@ -1120,6 +1120,12 @@ h1,h2,h3,h4,h5 {
   transition: var(--transition);
 }
 
+.contact-item a {
+  display: inline-block;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .contact-item a:hover { color: var(--gold); }
 
 .contact-tagline {
