@@ -2689,3 +2689,22 @@ h1,h2,h3,h4,h5 {
     line-height:1.7;
     color:#666;
 }
+.contact-booking-card{
+    max-width:700px;
+    margin:auto;
+    text-align:center;
+    padding:60px 40px;
+    background:#fff;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.contact-booking-card h2{
+    margin-bottom:20px;
+}
+
+.contact-booking-card p{
+    line-height:1.8;
+    margin-bottom:30px;
+    color:#666;
+}
