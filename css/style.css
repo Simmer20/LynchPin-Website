@@ -97,7 +97,7 @@ h1,h2,h3,h4,h5 {
   justify-content: space-between;
 }
 
-/* Logo */
+/* Logo 
 .nav-logo {
   display: flex;
   align-items: center;
@@ -161,19 +161,97 @@ h1,h2,h3,h4,h5 {
   letter-spacing: 0.3em;
   text-transform: lowercase;
   margin-top: 2px;
-}
-.logo-tagline {
-    font-size: 0.7rem;
-    font-weight: 400;
-    color: #718096;
-    letter-spacing: 0.3px;
-    text-transform: lowercase;
-    margin-top: -2px;
-    transition: color 0.3s ease;
+} */
+/* Logo Styles */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
 }
 
-.logo-link:hover .logo-tagline {
-    color: #4a5568;
+.logo {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+.logo-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.logo-text {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15rem;
+}
+
+.logo-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: #1a365d;
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+}
+
+.logo-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a365d;
+  letter-spacing: 1.5px;
+}
+
+.logo-tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: #d4af37; /* Gold color */
+  letter-spacing: 0.8px;
+  text-transform: lowercase;
+  margin-top: -1px;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.nav-logo:hover .logo-tagline {
+  opacity: 1;
+}
+
+/* Optional: Add a subtle gold dot before tagline */
+.logo-tagline::before {
+  content: "• ";
+  color: #d4af37;
+  font-weight: 700;
+}
+
+/* Optional: Gold glow effect on hover */
+.nav-logo:hover .logo-tagline {
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .logo {
+    height: 40px;
+  }
+  
+  .logo-name {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+  
+  .logo-sub {
+    font-size: 0.7rem;
+  }
+  
+  .logo-tagline {
+    font-size: 0.5rem;
+    letter-spacing: 0.5px;
+  }
 }
 
 /* Nav links */
