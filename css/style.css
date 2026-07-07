@@ -162,6 +162,19 @@ h1,h2,h3,h4,h5 {
   text-transform: lowercase;
   margin-top: 2px;
 }
+.logo-tagline {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #718096;
+    letter-spacing: 0.3px;
+    text-transform: lowercase;
+    margin-top: -2px;
+    transition: color 0.3s ease;
+}
+
+.logo-link:hover .logo-tagline {
+    color: #4a5568;
+}
 
 /* Nav links */
 .nav-links {
