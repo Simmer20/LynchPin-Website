@@ -469,5 +469,19 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    // Flip card functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.flip-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Prevent flipping if clicking a link inside
+            if (e.target.closest('a') || e.target.closest('button')) return;
+            this.classList.toggle('flipped');
+        });
+    });
+});
+  </script>
 </body>
 </html>
