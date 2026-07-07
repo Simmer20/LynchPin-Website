@@ -635,7 +635,7 @@ h1,h2,h3,h4,h5 {
 
 /* ============================================================
    SERVICES SECTION
-   ============================================================ */
+   ============================================================ 
 .services-section { background: var(--navy-dark); }
 
 .services-grid {
@@ -744,6 +744,245 @@ h1,h2,h3,h4,h5 {
   left: 0;
   color: var(--gold);
   font-size: 0.75rem;
+}*/
+/* Services Section */
+.services-section {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.services-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #1a365d;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #4a5568;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Flip Card Container */
+.flip-card {
+    background-color: transparent;
+    height: 480px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front & Back */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.flip-card-front {
+    background: white;
+    border: 1px solid #e2e8f0;
+}
+
+.flip-card-back {
+    background: #1a365d;
+    color: white;
+    transform: rotateY(180deg);
+    border: 1px solid #2a4a7f;
+}
+
+/* Front Styling */
+.card-badge {
+    display: inline-block;
+    background: #e2e8f0;
+    color: #1a365d;
+    padding: 0.25rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    align-self: flex-start;
+    margin-bottom: 1rem;
+}
+
+.flip-card-front h3 {
+    font-size: 1.5rem;
+    color: #1a365d;
+    margin-bottom: 0.5rem;
+}
+
+.price-tag {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2b6cb0;
+    margin-bottom: 1.5rem;
+}
+
+.price-tag span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #4a5568;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    flex-grow: 1;
+}
+
+.feature-list li {
+    padding: 0.4rem 0;
+    color: #2d3748;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #f0f4f8;
+}
+
+.feature-list li:last-child {
+    border-bottom: none;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.duration-badge {
+    background: #ebf8ff;
+    color: #2b6cb0;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.click-hint {
+    color: #a0aec0;
+    font-size: 0.75rem;
+}
+
+/* Back Styling */
+.flip-card-back h4 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    border-bottom: 2px solid #4a7bb5;
+    padding-bottom: 0.5rem;
+}
+
+.detail-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    flex-grow: 1;
+}
+
+.detail-list li {
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    color: #e2e8f0;
+}
+
+.detail-list li:last-child {
+    border-bottom: none;
+}
+
+.detail-list strong {
+    color: #90cdf4;
+    display: block;
+    font-size: 0.85rem;
+}
+
+.back-cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.duration-full {
+    font-size: 0.85rem;
+    color: #bee3f8;
+}
+
+.click-back {
+    font-size: 0.8rem;
+    color: #90cdf4;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.click-back:hover {
+    opacity: 1;
+}
+
+/* Scrollbar for back side */
+.flip-card-back::-webkit-scrollbar {
+    width: 4px;
+}
+
+.flip-card-back::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+}
+
+.flip-card-back::-webkit-scrollbar-thumb {
+    background: #4a7bb5;
+    border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cards-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+    }
+    
+    .flip-card {
+        height: 460px;
+    }
+    
+    .services-section h2 {
+        font-size: 2rem;
+    }
 }
 
 /* ============================================================
