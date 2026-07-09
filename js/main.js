@@ -238,6 +238,48 @@ document.addEventListener('DOMContentLoaded', () => {
     startAutoplay();
   });
 
+//Case Studies
+    // Hamburger menu
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+      if (hamburger && navLinks) {
+        hamburger.addEventListener('click', function() {
+          navLinks.classList.toggle('open');
+          this.classList.toggle('active');
+        });
+      }
+    });
+
+    // Lightbox
+    document.addEventListener('DOMContentLoaded', function() {
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const closeBtn = document.getElementById('lightboxClose');
+
+      galleryItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const img = this.querySelector('img');
+          if (img) {
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+          }
+        });
+      });
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+      }
+
+      if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+      if (lightbox) lightbox.addEventListener('click', function(e) {
+        if (e.target === this) closeLightbox();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeLightbox();
+      });
+    });
 
   /* ---- Contact form submission ---- */
   const form    = document.getElementById('contactForm');
