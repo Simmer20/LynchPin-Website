@@ -3941,4 +3941,323 @@ h1,h2,h3,h4,h5 {
         height: 210px;
   }
 }
-    
+  /* =====================================================
+   SPEAKING & EVENTS
+===================================================== */
+.events-section{
+    padding:120px 0;
+    background:#f8fafc;
+}
+.section-description{
+    max-width:750px;
+    margin:20px auto 0;
+    text-align:center;
+    color:#6b7280;
+    line-height:1.8;
+   font-size:1.05rem;
+}
+/* =============================
+   EVENT CARD
+============================= */
+.event-card{
+    display:grid;
+    grid-template-columns:1fr 1.1fr;
+    gap:60px;
+    background:#fff;
+    border-radius:24px;
+    padding:50px;
+    margin-top:70px;
+    box-shadow:0 18px 40px rgba(0,0,0,.06);
+    overflow:hidden;
+    align-items:center;
+    transition:.35s ease;
+}
+.event-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 28px 60px rgba(0,0,0,.1);
+}
+/* Alternate cards */
+.event-card.reverse{
+    grid-template-columns:1.1fr 1fr;
+}
+/* =============================
+   EVENT INFO
+============================= */
+.logo-chip{
+    width:80px;
+    margin-bottom:18px;
+}
+.event-type{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:50px;
+    background:#d4af37;
+    color:#fff;
+    font-size:.82rem;
+    font-weight:600;
+    margin-bottom:20px;
+}
+.event-info h3{
+    font-size:2rem;
+    color:#102a43;
+    margin-bottom:18px;
+}
+.event-summary{
+    color:#52606d;
+    line-height:1.9;
+    margin-bottom:35px;
+}
+.event-details{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+.detail-item{
+    padding:18px;
+    border-radius:16px;
+    background:#f8fafc;
+}
+.detail-item h5{
+    color:#d4af37;
+    margin-bottom:8px;
+    font-size:.82rem;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+.detail-item p{
+    color:#334e68;
+    line-height:1.6;
+}
+/* =============================
+   GALLERY
+============================= */
+.event-gallery{
+    overflow:hidden;
+    border-radius:20px;
+    position:relative;
+}
+.gallery-track{
+    display:flex;
+    gap:18px;
+    width:max-content;
+    animation:galleryScroll 32s linear infinite;
+}
+.gallery-track:hover{
+    animation-play-state:paused;
+}
+.gallery-track img{
+    width:320px;
+    height:230px;
+    border-radius:16px;
+    object-fit:cover;
+    flex-shrink:0;
+    transition:.35s ease;
+    cursor:pointer;
+}
+.gallery-track img:hover{
+    transform:scale(1.04);
+}
+/* Soft fade */
+.event-gallery::before,
+.event-gallery::after{
+    content:"";
+    position:absolute;
+    top:0;
+    width:90px;
+    height:100%;
+    z-index:2;
+    pointer-events:none;
+}
+.event-gallery::before{
+    left:0;
+    background:linear-gradient(to right,#fff,transparent);
+}
+.event-gallery::after{
+    right:0;
+    background:linear-gradient(to left,#fff,transparent);
+}
+/* =============================
+   CTA
+============================= */
+.events-cta{
+    margin-top:120px;
+    text-align:center;
+    background:#102a43;
+    color:white;
+    padding:80px 60px;
+    border-radius:24px;
+}
+.events-cta h2{
+    font-size:2.4rem;
+    margin:20px 0;
+}
+.events-cta p{
+    max-width:700px;
+    margin:0 auto 40px;
+    line-height:1.9;
+    color:#d9e2ec;
+}
+.events-cta .btn{
+    padding:16px 36px;
+}
+/* =============================
+   SCROLL ANIMATION
+============================= */
+@keyframes galleryScroll{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-50%);
+    }
+}
+/* =============================
+   MOBILE
+============================= */
+@media(max-width:992px){
+.event-card{
+grid-template-columns:1fr;
+padding:35px;
+gap:35px;
+}
+.event-card.reverse{
+grid-template-columns:1fr;
+}
+.event-details{
+grid-template-columns:1fr
+}
+.event-info h3{
+font-size:1.7rem;
+}
+.gallery-track img{
+width:260px;
+height:190px;
+}
+.events-cta{
+padding:60px 30px;
+}
+.events-cta h2{
+font-size:2rem;
+}
+}
+@media(max-width:576px){
+.gallery-track img{
+width:220px;
+height:160px;
+}
+.logo-chip{
+width:65px;
+}
+.event-info h3{
+font-size:1.5rem;
+}
+.section-description{
+font-size:1rem;
+}
+}  
+/* =============================
+   LIGHTBOX
+============================= */
+.lightbox{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.9);
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+visibility:hidden;
+transition:.3s;
+z-index:9999;
+}
+.lightbox.show{
+opacity:1;
+visibility:visible;
+}
+.lightbox img{
+max-width:90%;
+max-height:90%;
+border-radius:18px;
+}
+.close-lightbox{
+position:absolute;
+top:30px;
+right:40px;
+font-size:45px;
+color:white;
+cursor:pointer;
+font-weight:300;
+}
+/* ==========================================
+   TRUSTED BY
+========================================== */
+.trusted-section{
+    padding:100px 0;
+    background:#ffffff;
+}
+.trusted-header{
+    text-align:center;
+    max-width:760px;
+    margin:0 auto 70px;
+}
+.trusted-header h2{
+    font-size:2.7rem;
+    color:#0f172a;
+    margin:15px 0;
+}
+.trusted-header p{
+    color:#64748b;
+    line-height:1.9;
+}
+/* =============================== */
+.logo-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:28px;
+}
+/* =============================== */
+.partner-card{
+    background:white;
+    border-radius:22px;
+    padding:35px;
+    height:150px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:1px solid #eef2f7;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+    transition:.35s ease;
+}
+.partner-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 25px 50px rgba(0,0,0,.10);
+    border-color:#d4af37;
+}
+/* =============================== */
+.partner-card img{
+    max-width:170px;
+    max-height:75px;
+    width:auto;
+    height:auto;
+    object-fit:contain;
+    opacity:.75;
+    transition:.35s ease;
+}
+.partner-card:hover img{
+    filter:none;
+    opacity:1;
+    transform:scale(1.08);
+}
+/* =============================== */
+@media(max-width:768px){
+.logo-grid{
+grid-template-columns:repeat(2,1fr);
+}
+.partner-card{
+height:120px;
+padding:20px;
+}
+.partner-card img{
+max-width:120px;
+}
+}
