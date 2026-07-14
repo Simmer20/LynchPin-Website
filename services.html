@@ -3,13 +3,166 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services | Lynchpin Advisory</title>
+  <title>Services | LynchPin Advisory</title>
   <meta name="description" content="Explore the LynchPin's services: strategic consulting plans, speaking & event hosting with Hanisa Weru, and US lead generation & sales consultancy." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+
+    /* ================= EVENT CARDS ================= */
+    .event-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 50px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+      border: 1px solid #e8edf4;
+      align-items: center;
+    }
+
+    .event-card.reverse {
+      direction: rtl;
+    }
+    .event-card.reverse > * {
+      direction: ltr;
+    }
+
+    .event-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .event-type {
+      display: inline-block;
+      padding: 4px 14px;
+      background: rgba(212,175,55,.12);
+      color: #d4af37;
+      border-radius: 20px;
+      font-size: .75rem;
+      font-weight: 600;
+      width: fit-content;
+    }
+
+    .event-info h3 {
+      font-size: 1.5rem;
+      color: #0a192f;
+      margin: 4px 0;
+    }
+
+    .event-summary {
+      color: #555;
+      font-size: .95rem;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .event-details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .detail-item h5 {
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #999;
+      margin-bottom: 2px;
+    }
+
+    .detail-item strong,
+    .detail-item p {
+      font-size: .85rem;
+      color: #0a192f;
+      margin: 0;
+    }
+
+    .event-gallery {
+      overflow: hidden;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 14px;
+      animation: scrollGallery 20s linear infinite;
+      width: max-content;
+    }
+
+    .event-gallery:hover .gallery-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes scrollGallery {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 1024px) {
+      .event-card {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 28px;
+      }
+      .event-card.reverse {
+        direction: ltr;
+      }
+      .event-details {
+        grid-template-columns: 1fr 1fr;
+      }
+      .event-gallery .gallery-track img {
+        height: 160px;
+        max-width: 240px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .event-card {
+        padding: 20px;
+      }
+      .event-details {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .event-gallery .gallery-track img {
+        height: 120px;
+        max-width: 180px;
+      }
+      .event-info h3 {
+        font-size: 1.2rem;
+      }
+    }
+
+    /* ================= EVENTS CTA ================= */
+    .events-cta {
+      text-align: center;
+      padding: 50px 30px;
+      background: #f8fafc;
+      border-radius: 20px;
+      margin-top: 20px;
+    }
+    .events-cta h2 {
+      font-size: 2rem;
+      color: #0a192f;
+      margin: 12px 0;
+    }
+    .events-cta p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: #555;
+      line-height: 1.8;
+    }
+  </style>
 </head>
 <body>
 
@@ -17,14 +170,14 @@
   <header class="navbar" id="navbar">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
-         <div class="logo-top">
-        <img src="images/LynchPin_Logo.jpg" alt="Website Logo" class="logo">
-        <div class="logo-text">
+        <div class="logo-top">
+          <img src="images/LynchPin_Logo.jpg" alt="Website Logo" class="logo">
+          <div class="logo-text">
             <span class="logo-sub">the</span>
             <span class="logo-name">LYNCHPIN</span>
+          </div>
         </div>
-    </div>
-    <span class="logo-tagline">WE CONNECT THE DOTS</span>
+        <span class="logo-tagline">WE CONNECT THE DOTS</span>
       </a>
       <nav class="nav-links" id="navLinks">
         <a href="about.html">About</a>
@@ -54,525 +207,299 @@
   </section>
 
   <!-- ========== SERVICE 1: CONSULTING PLANS ========== -->
-  <!--<section class="section consulting-section" id="consulting-plans">
+  <section class="services-section" id="consulting-plans">
     <div class="container">
       <div class="section-header">
-        <p class="section-eyebrow">Service 01 — Business Strategist &amp; Consultant</p>
+        <p class="section-eyebrow">Growth Strategy &amp; Market Expansion</p>
         <h2 class="section-title">Commercial Growth <span class="gold-text">Partnership Plans</span></h2>
         <p class="section-subtitle">Choose the level of commercial growth partnership that matches your organization's stage, from focused strategy to embedded executive support.</p>
       </div>
-
-      <div class="plans-grid">
-        PLAN 1: FOUNDATION 
-        <div class="plan-card">
-          <div class="plan-header">
-            <h3>Foundation</h3>
-            <p class="plan-tag">For startups & early-stage teams</p>
+      <div class="cards-grid">
+        <!-- Card 1: Foundation -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-badge">Foundation</div>
+              <h3>Strategic Sprint</h3>
+              <p class="plan-tag">For startups & early-stage teams</p>
+              <p class="plan-desc">Ideal for organizations laying the groundwork for sustainable growth and needing clear commercial direction.</p>
+              <ul class="feature-list">
+                <li><i class="fas fa-check"></i> Commercial readiness assessment</li>
+                <li><i class="fas fa-check"></i> Commercial strategy planning</li>
+                <li><i class="fas fa-check"></i> Priority growth opportunities</li>
+                <li><i class="fas fa-check"></i> Strategic roadmap document</li>
+                <li><i class="fas fa-check"></i> Focused recommendations for next steps</li>
+              </ul>
+              <div class="card-footer">
+                <span class="duration-badge">5 Days</span>
+                <span class="click-hint">Click to flip →</span>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h4>What's Included</h4>
+              <ul class="detail-list">
+                <li><strong>Deep-dive discovery:</strong> 2-day executive workshop</li>
+                <li><strong>Market analysis:</strong> Opportunity mapping</li>
+                <li><strong>Commercial engine design:</strong> Revenue model & pricing</li>
+                <li><strong>Partnership blueprint:</strong> 20+ strategic targets</li>
+                <li><strong>Deliverable:</strong> Actionable playbook</li>
+              </ul>
+              <div class="back-cta">
+                <span class="duration-full">5-Day Intensive</span>
+                <span class="click-back">↺ Flip back</span>
+              </div>
+            </div>
           </div>
-          <p class="plan-desc">Ideal for organizations laying the groundwork for sustainable growth and needing clear commercial direction.</p>
-          <ul class="plan-features">
-            <li><i class="fas fa-check"></i> Commercial readiness assessment</li>
-            <li><i class="fas fa-check"></i> Commercial strategy planning</li>
-            <li><i class="fas fa-check"></i> Priority growth opportunities</li>
-            <li><i class="fas fa-check"></i> Strategic roadmap document</li>
-            <li><i class="fas fa-check"></i> Focused recommendations for next steps</li>
-          </ul>
-          <a href="index.html#contact" class="btn btn-outline-dark btn-full">Get Started</a>
         </div>
 
-         PLAN 2: GROWTH (Featured) 
-        <div class="plan-card featured-plan">
-          <div class="plan-badge">Most Popular</div>
-          <div class="plan-header">
-            <h3>Growth</h3>
-            <p class="plan-tag">For scaling organizations & NGOs</p>
+        <!-- Card 2: Growth -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-badge">Growth</div>
+              <h3>Fractional Chief Growth Officer</h3>
+              <p class="plan-tag">For scaling organizations & NGOs</p>
+              <p class="plan-desc">A deeper partnership for organizations ready to sharpen market execution and build high-value relationships.</p>
+              <ul class="feature-list">
+                <li><i class="fas fa-check"></i> Everything in Foundation, plus:</li>
+                <li><i class="fas fa-check"></i> Go-to-market design</li>
+                <li><i class="fas fa-check"></i> Strategic partnerships</li>
+                <li><i class="fas fa-check"></i> Executive business development</li>
+              </ul>
+              <div class="card-footer">
+                <span class="duration-badge">6 Months</span>
+                <span class="click-hint">Click to flip →</span>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h4>What's Included</h4>
+              <ul class="detail-list">
+                <li><strong>Bi-weekly strategy sessions:</strong> With your executive team</li>
+                <li><strong>Sales engine build:</strong> CRM setup, pipeline, and KPIs</li>
+                <li><strong>Partnership activation:</strong> 5-7 warm introductions</li>
+                <li><strong>Team development:</strong> Commercial skills training</li>
+                <li><strong>Monthly reviews:</strong> Progress against growth targets</li>
+                <li><strong>Deliverable:</strong> Fully operational commercial function</li>
+              </ul>
+              <div class="back-cta">
+                <span class="duration-full">6-Month Engagement</span>
+                <span class="click-back">↺ Flip back</span>
+              </div>
+            </div>
           </div>
-          <p class="plan-desc">A deeper partnership for organizations ready to sharpen market execution and build high-value relationships.</p>
-          <ul class="plan-features">
-            <li><i class="fas fa-check"></i> Everything in Foundation, plus:</li>
-            <li><i class="fas fa-check"></i> Go-to-market design</li>
-            <li><i class="fas fa-check"></i> Strategic partnerships</li>
-            <li><i class="fas fa-check"></i> Executive business development</li>
-            <li><i class="fas fa-check"></i> Partner and opportunity prioritization</li>
-            <li><i class="fas fa-check"></i> Ongoing strategic advisory support</li>
-          </ul>
-          <a href="index.html#contact" class="btn btn-gold btn-full">Get Started</a>
         </div>
 
-        PLAN 3: ENTERPRISE 
-        <div class="plan-card">
-          <div class="plan-header">
-            <h3>Enterprise</h3>
-            <p class="plan-tag">For corporations & institutions</p>
+        <!-- Card 3: Enterprise -->
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <div class="card-badge">Enterprise</div>
+              <h3>Executive Growth Officer</h3>
+              <p class="plan-tag">For corporations & institutions</p>
+              <p class="plan-desc">An embedded executive growth partnership for organizations pursuing expansion, revenue acceleration, and commercial scale.</p>
+              <ul class="feature-list">
+                <li><i class="fas fa-check"></i> Everything in Growth, plus:</li>
+                <li><i class="fas fa-check"></i> Enterprise Sales</li>
+                <li><i class="fas fa-check"></i> Pricing and packaging strategy</li>
+                <li><i class="fas fa-check"></i> Market expansion planning</li>
+                <li><i class="fas fa-check"></i> Revenue acceleration</li>
+                <li><i class="fas fa-check"></i> Leadership coaching</li>
+                <li><i class="fas fa-check"></i> Commercial team development</li>
+                <li><i class="fas fa-check"></i> Executive representation</li>
+                <li><i class="fas fa-check"></i> Commercialization support</li>
+              </ul>
+              <div class="card-footer">
+                <span class="duration-badge">1 Year+</span>
+                <span class="click-hint">Click to flip →</span>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <h4>What's Included</h4>
+              <ul class="detail-list">
+                <li><strong>Dedicated strategic partner:</strong> Embedded in your leadership</li>
+                <li><strong>Full commercial rebuild:</strong> Strategy → Execution → Scale</li>
+                <li><strong>Market expansion:</strong> Enter 3-5 new markets</li>
+                <li><strong>Investor readiness:</strong> Pitch deck & fundraising support</li>
+                <li><strong>Executive coaching:</strong> For your leadership team</li>
+                <li><strong>Deliverable:</strong> Sustainable growth engine & $5M+ pipeline</li>
+              </ul>
+              <div class="back-cta">
+                <span class="duration-full">1-Year Partnership</span>
+                <span class="click-back">↺ Flip back</span>
+              </div>
+            </div>
           </div>
-          <p class="plan-desc">An embedded executive growth partnership for organizations pursuing expansion, revenue acceleration, and commercial scale.</p>
-          <ul class="plan-features">
-            <li><i class="fas fa-check"></i> Everything in Growth, plus:</li>
-            <li><i class="fas fa-check"></i> Enterprise Sales</li>
-            <li><i class="fas fa-check"></i> Pricing and packaging strategy</li>
-            <li><i class="fas fa-check"></i> Market expansion planning</li>
-            <li><i class="fas fa-check"></i> Revenue acceleration</li>
-            <li><i class="fas fa-check"></i> Leadership coaching</li>
-            <li><i class="fas fa-check"></i> Commercial team development</li>
-            <li><i class="fas fa-check"></i> Executive representation</li>
-            <li><i class="fas fa-check"></i> Commercialization support</li>
-          </ul>
-          <a href="index.html#contact" class="btn btn-outline-dark btn-full">Request Consultation</a>
         </div>
       </div>
-      <p class="plans-note"><i class="fas fa-info-circle"></i> All plans are customizable based on scope, sector, market complexity, and the level of hands-on support required.</p>
-    </div>
-  </section> -->
-  <section class="services-section">
-    <div class="container">
-    <div class="section-header">
-        <p class="section-eyebrow">Growth Strategy &amp; Market Expansion </p>
-        <h2 class="section-title">Commercial Growth <span class="gold-text">Partnership Plans</span></h2>
-        <p class="section-subtitle">Choose the level of commercial growth partnership that matches your organization's stage, from focused strategy to embedded executive support.</p>
-      </div>
-        <div class="cards-grid">
-            <!-- Card 1: Foundation -->
-            <div class="flip-card">
-                <div class="flip-card-inner">
-                    <!-- Front -->
-                    <div class="flip-card-front">
-                        <div class="card-badge">Foundation</div>
-                        <h3>Strategic Sprint</h3>
-                        <p class="plan-tag">For startups & early-stage teams</p>
-                        <p class="plan-desc">Ideal for organizations laying the groundwork for sustainable growth and needing clear commercial direction.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Commercial readiness assessment</li>
-                            <li><i class="fas fa-check"></i> Commercial strategy planning</li>
-                            <li><i class="fas fa-check"></i> Priority growth opportunities</li>
-                            <li><i class="fas fa-check"></i> Strategic roadmap document</li>
-                            <li><i class="fas fa-check"></i> Focused recommendations for next steps</li>
-                                        </ul>
-                        <div class="card-footer">
-                            <span class="duration-badge">5 Days</span>
-                            <span class="click-hint">Click to flip →</span>
-                        </div>
-                    </div>
-                    <!-- Back -->
-                    <div class="flip-card-back">
-                        <h4>What's Included</h4>
-                        <ul class="detail-list">
-                            <li><strong>Deep-dive discovery:</strong> 2-day executive workshop</li>
-                            <li><strong>Market analysis:</strong> Opportunity mapping</li>
-                            <li><strong>Commercial engine design:</strong> Revenue model & pricing</li>
-                            <li><strong>Partnership blueprint:</strong> 20+ strategic targets</li>
-                            <li><strong>Deliverable:</strong> Actionable playbook</li>
-                        </ul>
-                        <div class="back-cta">
-                            <span class="duration-full">5-Day Intensive</span>
-                            <span class="click-back">↺ Flip back</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 2: Growth -->
-            <div class="flip-card">
-                <div class="flip-card-inner">
-                    <!-- Front -->
-                    <div class="flip-card-front">
-                        <div class="card-badge">Growth</div>
-                        <h3>Fractional Chief Growth Officer</h3>
-                        <p class="plan-tag">For scaling organizations & NGOs</p>
-                        <p class="plan-desc">A deeper partnership for organizations ready to sharpen market execution and build high-value relationships.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Everything in Foundation, plus:</li>
-                            <li><i class="fas fa-check"></i> Go-to-market design</li>
-                            <li><i class="fas fa-check"></i> Strategic partnerships</li>
-                            <li><i class="fas fa-check"></i> Executive business development</li>
-                        </ul>
-                        <div class="card-footer">
-                            <span class="duration-badge">6 Months</span>
-                            <span class="click-hint">Click to flip →</span>
-                        </div>
-                    </div>
-                    <!-- Back -->
-                    <div class="flip-card-back">
-                        <h4>What's Included</h4>
-                        <ul class="detail-list">
-                            <li><strong>Bi-weekly strategy sessions:</strong> With your executive team</li>
-                            <li><strong>Sales engine build:</strong> CRM setup, pipeline, and KPIs</li>
-                            <li><strong>Partnership activation:</strong> 5-7 warm introductions</li>
-                            <li><strong>Team development:</strong> Commercial skills training</li>
-                            <li><strong>Monthly reviews:</strong> Progress against growth targets</li>
-                            <li><strong>Deliverable:</strong> Fully operational commercial function</li>
-                        </ul>
-                        <div class="back-cta">
-                            <span class="duration-full">6-Month Engagement</span>
-                            <span class="click-back">↺ Flip back</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 3: Enterprise -->
-            <div class="flip-card">
-                <div class="flip-card-inner">
-                    <!-- Front -->
-                    <div class="flip-card-front">
-                        <div class="card-badge">Enterprise</div>
-                        <h3>Executive Growth Officer</h3>
-                        <p class="plan-tag">For corporations & institutions</p>
-                         <p class="plan-desc">An embedded executive growth partnership for organizations pursuing expansion, revenue acceleration, and commercial scale.</p>
-                        <ul class="feature-list">
-                          <li><i class="fas fa-check"></i> Everything in Growth, plus:</li>
-                          <li><i class="fas fa-check"></i> Enterprise Sales</li>
-                          <li><i class="fas fa-check"></i> Pricing and packaging strategy</li>
-                          <li><i class="fas fa-check"></i> Market expansion planning</li>
-                          <li><i class="fas fa-check"></i> Revenue acceleration</li>
-                          <li><i class="fas fa-check"></i> Leadership coaching</li>
-                          <li><i class="fas fa-check"></i> Commercial team development</li>
-                          <li><i class="fas fa-check"></i> Executive representation</li>
-                          <li><i class="fas fa-check"></i> Commercialization support</li>
-                        </ul>
-                        <div class="card-footer">
-                            <span class="duration-badge">1 Year+</span>
-                            <span class="click-hint">Click to flip →</span>
-                        </div>
-                    </div>
-                    <!-- Back -->
-                    <div class="flip-card-back">
-                        <h4>What's Included</h4>
-                        <ul class="detail-list">
-                            <li><strong>Dedicated strategic partner:</strong> Embedded in your leadership</li>
-                            <li><strong>Full commercial rebuild:</strong> Strategy → Execution → Scale</li>
-                            <li><strong>Market expansion:</strong> Enter 3-5 new markets</li>
-                            <li><strong>Investor readiness:</strong> Pitch deck & fundraising support</li>
-                            <li><strong>Executive coaching:</strong> For your leadership team</li>
-                            <li><strong>Deliverable:</strong> Sustainable growth engine & $5M+ pipeline</li>
-                        </ul>
-                        <div class="back-cta">
-                            <span class="duration-full">1-Year Partnership</span>
-                            <span class="click-back">↺ Flip back</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
   </section>
-  <!-- <section class="services-section sustainability-section">
+
+  <!-- =======================================================
+       SPEAKING & EVENT HOSTING
+  ======================================================= -->
+  <section class="events-section" id="speaking">
     <div class="container">
-    <div class="section-header">
-        <p class="section-eyebrow">Sustainability Consulting</p>
-        <h2 class="section-title">Sustainability <span class="gold-text">Partnership Plans</span></h2>
-        <p class="section-subtitle">Choose the level of sustainability partnership that matches your organization's stage, from fundable strategy to embedded climate finance support.</p>
+      <div class="section-header">
+        <span class="section-eyebrow">Speaking • Moderation • Event Hosting</span>
+        <h2 class="section-title">Conversations That Shape <span class="gold-text">Industries</span></h2>
+        <p class="section-description">
+          Hanisa partners with organizations across Africa to moderate executive conversations,
+          facilitate leadership workshops, host conferences, and deliver keynote sessions around
+          commercial growth, sustainability, digital transformation, AI, and the future of work.
+        </p>
       </div>
-        <div class="cards-grid">
-            <div class="flip-card">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-badge">Foundation</div>
-                        <h3>Sustainability Readiness Sprint</h3>
-                        <p class="plan-tag">For startups & early-stage impact ventures</p>
-                        <p class="plan-desc">Ideal for organizations building the case for clean energy, clean water, or carbon initiatives and needing a clear, fundable strategy.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-leaf"></i> Sustainability readiness assessment</li>
-                            <li><i class="fas fa-leaf"></i> Clean energy / clean water opportunity mapping</li>
-                            <li><i class="fas fa-leaf"></i> Carbon credit feasibility screening</li>
-                            <li><i class="fas fa-leaf"></i> Strategic roadmap document</li>
-                            <li><i class="fas fa-leaf"></i> Focused recommendations for next steps</li>
-                        </ul>
-                        <div class="card-footer">
-                            <span class="duration-badge">5 Days</span>
-                            <span class="click-hint">Click to explore →</span>
-                        </div>
-                    </div>
-                    <div class="flip-card-back">
-                        <h4>What's Included</h4>
-                        <ul class="detail-list">
-                            <li><strong>Deep-dive discovery:</strong> 2-day executive workshop</li>
-                            <li><strong>Impact-market analysis:</strong> Sector and regulatory mapping</li>
-                            <li><strong>Financing pathway design:</strong> Grant, carbon, and green capital options</li>
-                            <li><strong>Partner blueprint:</strong> 15+ strategic and funding targets</li>
-                            <li><strong>Deliverable:</strong> Actionable sustainability playbook</li>
-                        </ul>
-                        <div class="back-cta">
-                            <span class="duration-full">5-Day Intensive</span>
-                            <span class="click-back">↺ Flip back</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="flip-card">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-badge">Growth</div>
-                        <h3>Fractional Chief Sustainability Officer</h3>
-                        <p class="plan-tag">For scaling organizations & NGOs</p>
-                        <p class="plan-desc">A deeper partnership for organizations ready to move from strategy to execution across clean energy, water, and carbon markets.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-leaf"></i> Everything in Foundation, plus:</li>
-                            <li><i class="fas fa-leaf"></i> Carbon credit structuring & MRV design</li>
-                            <li><i class="fas fa-leaf"></i> Green financing and grant facilitation</li>
-                            <li><i class="fas fa-leaf"></i> Strategic sustainability partnerships</li>
-                        </ul>
-                        <div class="card-footer">
-                            <span class="duration-badge">6 Months</span>
-                            <span class="click-hint">Click to explore →</span>
-                        </div>
-                    </div>
-                    <div class="flip-card-back">
-                        <h4>What's Included</h4>
-                        <ul class="detail-list">
-                            <li><strong>Bi-weekly strategy sessions:</strong> With your executive team</li>
-                            <li><strong>Carbon/financing engine build:</strong> MRV frameworks, funder pipeline, KPIs</li>
-                            <li><strong>Partnership activation:</strong> 5-7 warm introductions to funders/partners</li>
-                            <li><strong>Team development:</strong> Sustainability skills training</li>
-                            <li><strong>Monthly reviews:</strong> Progress against impact and revenue targets</li>
-                            <li><strong>Deliverable:</strong> Fully operational sustainability function</li>
-                        </ul>
-                        <div class="back-cta">
-                            <span class="duration-full">6-Month Engagement</span>
-                            <span class="click-back">↺ Flip back</span>
-                        </div>
-                    </div>
-                </div>
+      <!-- EVENT 1: SAWA -->
+      <div class="event-card">
+        <div class="event-info">
+          <img src="images/logo-SAWA.jpg" alt="SAWA" class="logo-chip" />
+          <span class="event-type">Executive Event Host</span>
+          <h3>SAWA Executive Event</h3>
+          <p class="event-summary">
+            Moderated executive event for SAWA, focusing on leadership and strategic growth in Africa.
+          </p>
+          <div class="event-details">
+            <div class="detail-item">
+              <h5>Location</h5>
+              <strong>Mövenpick Hotel, Nairobi</strong>
             </div>
-            <div class="flip-card">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="card-badge">Enterprise</div>
-                        <h3>Executive Sustainability Officer</h3>
-                        <p class="plan-tag">For corporations & institutions</p>
-                         <p class="plan-desc">An embedded executive partnership for organizations pursuing large-scale clean energy, water, or carbon market expansion.</p>
-                        <ul class="feature-list">
-                          <li><i class="fas fa-leaf"></i> Everything in Growth, plus:</li>
-                          <li><i class="fas fa-leaf"></i> Enterprise carbon market strategy</li>
-                          <li><i class="fas fa-leaf"></i> Climate finance & green bond readiness</li>
-                          <li><i class="fas fa-leaf"></i> Multi-market sustainability expansion</li>
-                          <li><i class="fas fa-leaf"></i> Leadership coaching</li>
-                          <li><i class="fas fa-leaf"></i> Regulatory & policy engagement</li>
-                          <li><i class="fas fa-leaf"></i> Executive representation at climate forums</li>
-                        </ul>
-                        <div class="card-footer">
-                            <span class="duration-badge">1 Year+</span>
-                            <span class="click-hint">Click to explore →</span>
-                        </div>
-                    </div>
-                    <div class="flip-card-back">
-                        <h4>What's Included</h4>
-                        <ul class="detail-list">
-                            <li><strong>Dedicated strategic partner:</strong> Embedded in your leadership</li>
-                            <li><strong>Full sustainability rebuild:</strong> Strategy → Financing → Scale</li>
-                            <li><strong>Market expansion:</strong> Enter 3-5 new markets or sectors</li>
-                            <li><strong>Investor/funder readiness:</strong> Pitch deck & climate finance support</li>
-                            <li><strong>Executive coaching:</strong> For your leadership team</li>
-                            <li><strong>Deliverable:</strong> Sustainable growth engine & $5M+ funding pipeline</li>
-                        </ul>
-                        <div class="back-cta">
-                            <span class="duration-full">1-Year Partnership</span>
-                            <span class="click-back">↺ Flip back</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="detail-item">
+              <h5>Role</h5>
+              <strong>Master of Ceremonies & Panel Moderator</strong>
             </div>
+            <div class="detail-item">
+              <h5>Focus</h5>
+              <strong>Product Launch • Clean Energy • Commercial Partnerships</strong>
+            </div>
+          </div>
         </div>
+        <div class="event-gallery">
+          <div class="gallery-track">
+            <img src="images/sunking-1.jpg" alt="SAWA event photo 1" />
+            <img src="images/sunking-2.jpg" alt="SAWA event photo 2" />
+            <img src="images/sunking-1.jpg" alt="SAWA event photo 1" />
+            <img src="images/sunking-2.jpg" alt="SAWA event photo 2" />
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENT 2: COP28 -->
+      <div class="event-card reverse">
+        <div class="event-info">
+          <img src="images/logo-sunking.jpg" alt="Sun King" class="logo-chip" />
+          <span class="event-type">Conference Presenter</span>
+          <h3>COP28 UAE Conference</h3>
+          <p class="event-summary">
+            Represented 4Life Solution at COP28 in Dubai, presenting SAWA Can innovation at the global climate expo.
+          </p>
+          <div class="event-details">
+            <div class="detail-item">
+              <h5>Location</h5>
+              <strong>Dubai, UAE — COP28 Global Climate Expo</strong>
+            </div>
+            <div class="detail-item">
+              <h5>Role</h5>
+              <strong>Company Representative & Conference Presenter</strong>
+            </div>
+            <div class="detail-item">
+              <h5>Focus</h5>
+              <strong>Clean Energy • Sustainable Water • Global Partnerships</strong>
+            </div>
+          </div>
+        </div>
+        <div class="event-gallery">
+          <div class="gallery-track">
+            <img src="images/sunking-1.jpg" alt="COP28 photo 1" />
+            <img src="images/sunking-2.jpg" alt="COP28 photo 2" />
+            <img src="images/sunking-1.jpg" alt="COP28 photo 1" />
+            <img src="images/sunking-2.jpg" alt="COP28 photo 2" />
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENT 3: GIZ / DPI -->
+      <div class="event-card">
+        <div class="event-info">
+          <img src="images/logo-giz.png" alt="GIZ" class="logo-chip" />
+          <span class="event-type">Conference Moderator</span>
+          <h3>Digital Public Infrastructure Summit</h3>
+          <p class="event-summary">
+            Moderated a four-day regional conference bringing together policymakers, development partners, and technology leaders to explore Africa's transition toward Digital Public Infrastructure.
+          </p>
+          <div class="event-details">
+            <div class="detail-item">
+              <h5>Location</h5>
+              <strong>Kofisi, Nairobi</strong>
+            </div>
+            <div class="detail-item">
+              <h5>Role</h5>
+              <strong>Lead Conference Moderator</strong>
+            </div>
+            <div class="detail-item">
+              <h5>Focus</h5>
+              <strong>Digital Transformation • Government • Innovation</strong>
+            </div>
+          </div>
+        </div>
+        <div class="event-gallery">
+          <div class="gallery-track">
+            <img src="images/Govstack.jpeg" alt="DPI Summit photo 1" />
+            <img src="images/Kofisi-pic.jpeg" alt="DPI Summit photo 2" />
+            <img src="images/Govstack.jpeg" alt="DPI Summit photo 1" />
+            <img src="images/Kofisi-pic.jpeg" alt="DPI Summit photo 2" />
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENT 4: ITM AFRICA -->
+      <div class="event-card reverse">
+        <div class="event-info">
+          <img src="images/logo-itm.jpg" alt="ITM Africa" class="logo-chip" />
+          <span class="event-type">Panel Speaker</span>
+          <h3>The Future of Work & Robotics</h3>
+          <p class="event-summary">
+            Joined industry leaders at Africa Leadership University to discuss how Artificial Intelligence and Robotics are reshaping leadership, employment, and the future workforce across Africa.
+          </p>
+          <div class="event-details">
+            <div class="detail-item">
+              <h5>Location</h5>
+              <strong>Africa Leadership University, Rwanda</strong>
+            </div>
+            <div class="detail-item">
+              <h5>Role</h5>
+              <strong>Panel Speaker</strong>
+            </div>
+            <div class="detail-item">
+              <h5>Focus</h5>
+              <strong>AI • Robotics • Future of Work</strong>
+            </div>
+          </div>
+        </div>
+        <div class="event-gallery">
+          <div class="gallery-track">
+            <img src="images/itm-1.jpg" alt="ITM Africa panel photo 1" />
+            <img src="images/itm-2.jpg" alt="ITM Africa panel photo 2" />
+            <img src="images/itm-1.jpg" alt="ITM Africa panel photo 1" />
+            <img src="images/itm-2.jpg" alt="ITM Africa panel photo 2" />
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENTS CTA -->
+      <div class="events-cta">
+        <span class="section-eyebrow">Ready to Inspire Your Audience?</span>
+        <h2>Looking for a keynote speaker, moderator, or executive event host?</h2>
+        <p>
+          Whether you're hosting a leadership summit, board retreat, industry conference,
+          innovation forum, or executive roundtable — Hanisa brings strategic insight,
+          engaging facilitation, and conversations that move people from ideas to action.
+        </p>
+        <a href="index.html#contact" class="btn btn-primary">Book Hanisa for Your Next Event →</a>
+      </div>
     </div>
-  </section> -->
-<!-- =======================================================
-     SPEAKING & EVENT HOSTING
-======================================================= -->
-<section class="events-section" id="speaking">
-    <div class="container">
-        <div class="section-header">
-            <span class="section-eyebrow">
-                Speaking • Moderation • Event Hosting
-            </span>
-            <h2 class="section-title">
-                Conversations That Shape
-                <span class="gold-text">Industries</span>
-            </h2>
-            <p class="section-description">
-               Hanisa partners with organizations across Africa to moderate executive conversations,
-               facilitate leadership workshops, host conferences, and deliver keynote sessions around
-              commercial growth, sustainability, digital transformation, AI, and the future of work.
-            </p>
-        </div>
-        <!-- =======================================================
-             SUN KING
-        ======================================================= -->
-        <div class="event-card">
-            <div class="event-info">
-                <img src="images/logo-sunking.jpg"
-                     alt="Sun King"
-                     class="logo-chip">
-                <span class="event-type">
-                    Executive Event Host
-                </span>
-                <h3>
-                    Sun King Solar Inverter Launch
-                </h3>
-                <p class="event-summary">
-                    Hosted the official launch of Sun King's Solar Inverter,
-                    facilitating executive conversations between telecom operators,
-                    financial institutions, SACCOs, distributors, and strategic
-                    partners while guiding the day's panel discussions and keynote sessions.
-                </p>
-                <div class="event-details">
-                    <div class="detail-item">
-                        <h5>Location</h5>
-                        <p>Mövenpick Hotel, Nairobi</p>
-                    </div>
-                    <div class="detail-item">
-                        <h5>Role</h5>
-                        <p>Master of Ceremonies & Panel Moderator</p>
-                    </div>
-                    <div class="detail-item">
-                        <h5>Focus</h5>
-                        <p>
-                          Product Launch • Clean Energy • Commercial Partnerships
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="event-gallery">
-                <div class="gallery-track">
-                    <img src="images/sunking-1.jpg" alt="">
-                    <img src="images/sunking-2.jpg" alt="">
-                    <!-- <img src="images/sunking-3.jpg" alt="">
-                    <img src="images/sunking-4.jpg" alt=""> -->
-                    <!-- Duplicate for infinite scroll -->
-                    <img src="images/sunking-1.jpg" alt="">
-                    <img src="images/sunking-2.jpg" alt="">
-                    <!-- <img src="images/sunking-3.jpg" alt="">
-                    <img src="images/sunking-4.jpg" alt=""> -->
-                </div>
-            </div>
-        </div>
-        <!-- =======================================================
-             GIZ
-        ======================================================= -->
-        <div class="event-card reverse">
-            <div class="event-gallery">
-                <div class="gallery-track">
-                    <img src="images/Govstack.jpeg" alt="">
-                    <img src="images/Kofisi-pic.jpeg" alt="Kofisi">
-                    <!-- <img src="images/giz-3.jpg" alt="">
-                    <img src="images/giz-4.jpg" alt=""> -->
+  </section>
 
-                    <img src="images/giz-1.jpg" alt="">
-                    <img src="images/giz-2.jpg" alt="">
-                    <!-- <img src="images/giz-3.jpg" alt="">
-                    <img src="images/giz-4.jpg" alt=""> -->
-                </div>
-            </div>
-            <div class="event-info">
-                <img src="images/logo-giz.png"
-                     alt="GIZ"
-                     class="logo-chip">
-                <span class="event-type">
-                    Conference Moderator
-                </span>
-                <h3>
-                    Digital Public Infrastructure Summit
-                </h3>
-                <p class="event-summary">
-                    Moderated a four-day regional conference bringing together
-                    policymakers, development partners, and technology leaders
-                    to explore Africa's transition toward Digital Public Infrastructure.
-                </p>
-                <div class="event-details">
-                    <div class="detail-item">
-                        <h5>Location</h5>
-                        <p>Kofisi, Nairobi</p>
-                    </div>
-                    <div class="detail-item">
-                        <h5>Role</h5>
-                        <p>Lead Conference Moderator</p>
-                    </div>
-                    <div class="detail-item">
-                        <h5>Focus</h5>
-                        <p>
-                            Digital Transformation • Government • Innovation
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- =======================================================
-             ITM AFRICA
-        ======================================================= -->
-        <div class="event-card">
-            <div class="event-info">
-                <img src="images/logo-itm.jpg"
-                     alt="ITM Africa"
-                     class="logo-chip">
-                <span class="event-type">
-                    Panel Speaker
-                </span>
-                <h3>
-                    The Future of Work & Robotics
-                </h3>
-                <p class="event-summary">
-                    Joined industry leaders at Africa Leadership University
-                    to discuss how Artificial Intelligence and Robotics are
-                    reshaping leadership, employment, and the future workforce
-                    across Africa.
-                </p>
-                <div class="event-details">
-                    <div class="detail-item">
-                        <h5>Location</h5>
-                        <p>Africa Leadership University, Rwanda</p>
-                    </div>
-                    <div class="detail-item">
-                        <h5>Role</h5>
-                        <p>Panel Speaker</p>
-                    </div>
-                    <div class="detail-item">
-                        <h5>Focus</h5>
-                        <p>
-                            AI • Robotics • Future of Work
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="event-gallery">
-                <div class="gallery-track">
-                    <img src="images/itm-1.jpg" alt="">
-                    <img src="images/itm-2.jpg" alt="">
-                    <!-- <img src="images/itm-3.jpg" alt="">
-                    <img src="images/itm-4.jpg" alt=""> -->
-                    <img src="images/itm-1.jpg" alt="">
-                    <img src="images/itm-2.jpg" alt="">
-                    <!-- <img src="images/itm-3.jpg" alt="">
-                    <img src="images/itm-4.jpg" alt=""> -->
-                </div>
-            </div>
-        </div>
-        <!-- =======================================================
-             CTA
-        ======================================================= -->
-        <div class="events-cta">
-            <span class="section-eyebrow">
-                Ready to Inspire Your Audience?
-            </span>
-            <h2>
-                Looking for a keynote speaker,
-                moderator, or executive event host?
-            </h2>
-            <p>
-                Whether you're hosting a leadership summit,
-                board retreat, industry conference,
-                innovation forum, or executive roundtable,
-                Hanisa brings strategic insight,
-                engaging facilitation,
-                and conversations that move people from ideas to action.
-            </p>
-            <a href="contact.html" class="btn btn-primary">
-                Book Hanisa for Your Next Event →
-            </a>
-        </div>
-    </div>
-</section>
-
-  <!-- ========== SERVICE 3: CONSULTANCY ========== -->
+  <!-- ========== SERVICE 3: US CONSULTANCY ========== -->
   <section class="section us-consultancy-section" id="us-consultancy">
     <div class="container">
       <div class="section-header">
@@ -639,11 +566,11 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="index.html" class="nav-logo footer-logo">
-            <img src="images/LynchPin_Logo.jpg" alt="Website Logo" class="logo">
-        <div class="logo-text">
-          <span class="logo-name">LYNCHPIN</span>
-          <span class="logo-sub">advisory</span>
-        </div>
+            <img src="images/LynchPin_Logo.jpg" alt="Website Logo" class="logo" />
+            <div class="logo-text">
+              <span class="logo-name">LYNCHPIN</span>
+              <span class="logo-sub">advisory</span>
+            </div>
           </a>
           <p class="footer-desc">Connecting Strategic Partnerships Across Africa and beyond. Your trusted partner for sustainable growth, green energy, and transformative business advisory.</p>
           <div class="footer-social">
@@ -655,16 +582,16 @@
           <ul>
             <li><a href="about.html">About Us</a></li>
             <li><a href="services.html">Services</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="portfolio.html">Case Studies</a></li>
             <li><a href="about.html#team">Our Team</a></li>
           </ul>
         </div>
         <div class="footer-links">
           <h4>Services</h4>
           <ul>
-            <li><a href="services.html#consulting-plans">Consulting Plans</a></li>
-            <li><a href="services.html#speaking">Speaking & Events</a></li>
-            <li><a href="services.html#us-consultancy">US Consultancy</a></li>
+            <li><a href="#consulting-plans">Consulting Plans</a></li>
+            <li><a href="#speaking">Speaking & Events</a></li>
+            <li><a href="#us-consultancy">US Consultancy</a></li>
           </ul>
         </div>
         <div class="footer-links">
@@ -687,17 +614,15 @@
   <script src="js/main.js"></script>
   <script>
     // Flip card functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.flip-card');
-    
-    cards.forEach(card => {
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.flip-card');
+      cards.forEach(card => {
         card.addEventListener('click', function(e) {
-            // Prevent flipping if clicking a link inside
-            if (e.target.closest('a') || e.target.closest('button')) return;
-            this.classList.toggle('flipped');
+          if (e.target.closest('a') || e.target.closest('button')) return;
+          this.classList.toggle('flipped');
         });
+      });
     });
-});
   </script>
 </body>
 </html>
