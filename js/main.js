@@ -4,7 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ---- Three.js hero scene with scroll-driven motion ---- */
+  /* ---- Three.js hero particles with scroll-driven drift ---- */
   const initThreeHeroScroll = () => {
     const hero = document.getElementById('hero');
     const canvasHost = document.getElementById('heroThreeCanvas');
@@ -20,44 +20,53 @@ document.addEventListener('DOMContentLoaded', () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
     canvasHost.appendChild(renderer.domElement);
 
-    const root = new THREE.Group();
-    scene.add(root);
-
-    const knot = new THREE.Mesh(
-      new THREE.TorusKnotGeometry(2.2, 0.5, 160, 24),
-      new THREE.MeshStandardMaterial({
-        color: 0xc8a46a,
-        metalness: 0.65,
-        roughness: 0.35,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.58
-      })
-    );
-    root.add(knot);
-
     const particlesGeometry = new THREE.BufferGeometry();
-    const particleCount = 420;
+    const particleCount = 1700;
     const positions = new Float32Array(particleCount * 3);
+    const scales = new Float32Array(particleCount);
     for (let i = 0; i < particleCount; i += 1) {
       const i3 = i * 3;
-      positions[i3] = (Math.random() - 0.5) * 26;
-      positions[i3 + 1] = (Math.random() - 0.5) * 16;
-      positions[i3 + 2] = (Math.random() - 0.5) * 16;
+      positions[i3] = (Math.random() - 0.5) * 30;
+      positions[i3 + 1] = (Math.random() - 0.5) * 18;
+      positions[i3 + 2] = (Math.random() - 0.5) * 20;
+      scales[i] = Math.random();
     }
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     const particles = new THREE.Points(
       particlesGeometry,
       new THREE.PointsMaterial({
-        color: 0xe5c97c,
-        size: 0.06,
+        color: 0xf5edd8,
+        size: 0.07,
         transparent: true,
-        opacity: 0.9,
+        opacity: 0.92,
         blending: THREE.AdditiveBlending,
         depthWrite: false
       })
     );
     scene.add(particles);
+
+    const glowGeometry = new THREE.BufferGeometry();
+    const glowCount = 420;
+    const glowPositions = new Float32Array(glowCount * 3);
+    for (let i = 0; i < glowCount; i += 1) {
+      const i3 = i * 3;
+      glowPositions[i3] = (Math.random() - 0.5) * 22;
+      glowPositions[i3 + 1] = (Math.random() - 0.5) * 14;
+      glowPositions[i3 + 2] = (Math.random() - 0.5) * 16;
+    }
+    glowGeometry.setAttribute('position', new THREE.BufferAttribute(glowPositions, 3));
+    const glowParticles = new THREE.Points(
+      glowGeometry,
+      new THREE.PointsMaterial({
+        color: 0xc8a46a,
+        size: 0.11,
+        transparent: true,
+        opacity: 0.35,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    scene.add(glowParticles);
 
     const rim = new THREE.PointLight(0xe5c97c, 18, 24);
     rim.position.set(5, 4, 5);
@@ -91,14 +100,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const clock = new THREE.Clock();
     const tick = () => {
       const elapsed = clock.getElapsedTime();
-      const spin = elapsed * 0.18;
 
-      root.rotation.x = spin + scrollProgress * 1.05 + pointer.y * 0.08;
-      root.rotation.y = spin * 0.8 + scrollProgress * 1.3 + pointer.x * 0.1;
-      particles.rotation.y = elapsed * 0.025 + scrollProgress * 0.4;
-      particles.rotation.x = elapsed * 0.015 + scrollProgress * 0.25;
+      const pos = particlesGeometry.attributes.position.array;
+      for (let i = 0; i < particleCount; i += 1) {
+        const i3 = i * 3;
+        pos[i3 + 1] += 0.004 + scales[i] * 0.002;
+        pos[i3] += Math.sin(elapsed * 0.2 + i) * 0.00045;
+        if (pos[i3 + 1] > 8.5) {
+          pos[i3 + 1] = -8.5;
+        }
+      }
+      particlesGeometry.attributes.position.needsUpdate = true;
 
-      camera.position.z = 8.5 - scrollProgress * 1.5;
+      particles.rotation.y = elapsed * 0.016 + scrollProgress * 0.24;
+      particles.rotation.x = elapsed * 0.007 + scrollProgress * 0.14;
+      glowParticles.rotation.y = -elapsed * 0.012;
+      glowParticles.rotation.x = Math.sin(elapsed * 0.25) * 0.08;
+
+      camera.position.z = 8.6 - scrollProgress * 1.1;
       camera.position.x = pointer.x * 0.35;
       camera.position.y = -pointer.y * 0.25;
       camera.lookAt(0, 0, 0);
@@ -116,6 +135,70 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   initThreeHeroScroll();
+
+  /* ---- Three.js CTA ambient particles ---- */
+  const initCtaThreeFx = () => {
+    const host = document.getElementById('ctaThreeFx');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!host || typeof THREE === 'undefined' || reducedMotion) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 100);
+    camera.position.set(0, 0, 7);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
+    host.appendChild(renderer.domElement);
+
+    const pointsGeo = new THREE.BufferGeometry();
+    const count = 320;
+    const data = new Float32Array(count * 3);
+    for (let i = 0; i < count; i += 1) {
+      const i3 = i * 3;
+      data[i3] = (Math.random() - 0.5) * 10;
+      data[i3 + 1] = (Math.random() - 0.5) * 6;
+      data[i3 + 2] = (Math.random() - 0.5) * 6;
+    }
+    pointsGeo.setAttribute('position', new THREE.BufferAttribute(data, 3));
+
+    const points = new THREE.Points(
+      pointsGeo,
+      new THREE.PointsMaterial({
+        color: 0xe5c97c,
+        size: 0.06,
+        transparent: true,
+        opacity: 0.45,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    scene.add(points);
+
+    const resize = () => {
+      const w = Math.max(host.clientWidth, 1);
+      const h = Math.max(host.clientHeight, 1);
+      renderer.setSize(w, h);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    const clock = new THREE.Clock();
+    const tick = () => {
+      const t = clock.getElapsedTime();
+      points.rotation.y = t * 0.09;
+      points.rotation.x = Math.sin(t * 0.35) * 0.08;
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    };
+
+    tick();
+  };
+
+  initCtaThreeFx();
 
   /* ---- Navbar scroll behavior ---- */
   const navbar = document.getElementById('navbar');

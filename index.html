@@ -95,29 +95,30 @@
 
       <div class="map-wrapper">
         <div id="worldMap" class="world-map"></div>
+        <button type="button" class="map-reset-btn" id="mapResetBtn" aria-label="Reset map view">Reset View</button>
         <div class="map-tooltip-note"><i class="fas fa-info-circle"></i> Hover over highlighted markers to explore our active regions</div>
       </div>
 
       <div class="region-grid">
-        <div class="region-card">
+        <div class="region-card" data-region="Africa" role="button" tabindex="0" aria-label="Highlight Africa on map">
           <div class="region-icon"><i class="fas fa-globe-africa"></i></div>
           <h3>Africa</h3>
           <p class="region-count">22 Countries</p>
           <p class="region-desc">Our home continent and core focus — from East to West, Southern to North Africa.</p>
         </div>
-        <div class="region-card">
+        <div class="region-card" data-region="Middle East" role="button" tabindex="0" aria-label="Highlight Middle East on map">
           <div class="region-icon"><i class="fas fa-mosque"></i></div>
           <h3>Middle East</h3>
           <p class="region-count">Dubai · Kuwait · Qatar</p>
           <p class="region-desc">Gateway partnerships connecting Gulf capital and enterprise with African markets.</p>
         </div>
-        <div class="region-card">
+        <div class="region-card" data-region="Europe" role="button" tabindex="0" aria-label="Highlight Europe on map">
           <div class="region-icon"><i class="fas fa-landmark"></i></div>
           <h3>Europe</h3>
           <p class="region-count">Spain · London · Denmark</p>
           <p class="region-desc">Strategic bridges to European development finance, ESG capital, and institutions.</p>
         </div>
-        <div class="region-card">
+        <div class="region-card" data-region="United States" role="button" tabindex="0" aria-label="Highlight United States on map">
           <div class="region-icon"><i class="fas fa-flag-usa"></i></div>
           <h3>United States</h3>
           <p class="region-count">NY · Washington DC · Baltimore · Delaware</p>
@@ -261,6 +262,7 @@
           </div>
         </div>
         <div class="contact-booking-card">
+      <div id="ctaThreeFx" class="cta-three-fx" aria-hidden="true"></div>
 
     <h2>Turn Momentum Into Market Moves</h2>
     <p>
