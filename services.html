@@ -11,83 +11,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <style>
-    /* ================= THREE WAYS SECTION ================= */
-    .service-purpose-section {
-      padding: 84px 0 34px;
-      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-    }
-
-    .purpose-intro {
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto 48px;
-    }
-
-    .purpose-intro h2 {
-      font-size: clamp(2rem, 3.8vw, 2.8rem);
-      color: #102a43;
-      margin: 12px 0;
-    }
-
-    .purpose-intro p {
-      color: #52606d;
-      line-height: 1.8;
-      font-size: 1.02rem;
-    }
-
-    .purpose-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 22px;
-    }
-
-    .purpose-card {
-      background: #ffffff;
-      border: 1px solid #e6ebf2;
-      border-radius: 18px;
-      padding: 30px 26px;
-      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
-      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
-      display: flex;
-      flex-direction: column;
-      min-height: 270px;
-    }
-
-    .purpose-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(212,175,55,.65);
-      box-shadow: 0 24px 44px rgba(16, 42, 67, 0.14);
-    }
-
-    .purpose-card h3 {
-      font-size: 1.65rem;
-      color: #102a43;
-      margin-bottom: 14px;
-    }
-
-    .purpose-card p {
-      color: #486581;
-      line-height: 1.8;
-      margin-bottom: 20px;
-      flex: 1;
-    }
-
-    .purpose-link {
-      color: #b38718;
-      font-weight: 700;
-      letter-spacing: .02em;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .purpose-link i {
-      transition: transform .3s ease;
-    }
-
-    .purpose-link:hover i {
-      transform: translateX(4px);
-    }
 
     /* ================= EVENT CARDS ================= */
     .event-card {
@@ -186,9 +109,6 @@
 
     /* ================= RESPONSIVE ================= */
     @media (max-width: 1024px) {
-      .purpose-grid {
-        grid-template-columns: 1fr 1fr;
-      }
       .event-card {
         grid-template-columns: 1fr;
         gap: 24px;
@@ -207,12 +127,6 @@
     }
 
     @media (max-width: 600px) {
-      .service-purpose-section {
-        padding: 64px 0 18px;
-      }
-      .purpose-grid {
-        grid-template-columns: 1fr;
-      }
       .event-card {
         padding: 20px;
       }
@@ -292,45 +206,6 @@
     </div>
   </section>
 
-  <!-- ========== THREE WAYS: PURPOSE TO PRACTICE ========== -->
-  <section class="service-purpose-section">
-    <div class="container">
-      <div class="purpose-intro fade-up">
-        <p class="section-eyebrow">Three Ways We Bring Our Purpose to Life</p>
-        <h2>Through Strategy, Experiences, and Growth Execution</h2>
-        <p>
-          Choose the engagement style that fits your immediate priority, from long-range commercial advisory to high-impact speaking and direct US growth support.
-        </p>
-      </div>
-
-      <div class="purpose-grid">
-        <article class="purpose-card fade-up">
-          <h3>Commercial Growth Plans</h3>
-          <p>
-            Strategic advisory for teams that want sharper positioning, stronger partnerships, and a practical roadmap from ambition to market traction.
-          </p>
-          <a class="purpose-link" href="#consulting-plans">Explore Growth Plans <i class="fas fa-arrow-right"></i></a>
-        </article>
-
-        <article class="purpose-card fade-up">
-          <h3>Live Experiences</h3>
-          <p>
-            Keynotes, conference moderation, and executive workshops that turn complex topics into clear, actionable conversations your audience can apply immediately.
-          </p>
-          <a class="purpose-link" href="#speaking">Explore Experiences <i class="fas fa-arrow-right"></i></a>
-        </article>
-
-        <article class="purpose-card fade-up">
-          <h3>US Growth Consultancy</h3>
-          <p>
-            Hands-on lead generation, sales funnel design, and business development support for US-based companies building predictable, scalable pipeline.
-          </p>
-          <a class="purpose-link" href="#us-consultancy">Explore US Consultancy <i class="fas fa-arrow-right"></i></a>
-        </article>
-      </div>
-    </div>
-  </section>
-
   <!-- ========== SERVICE 1: CONSULTING PLANS ========== -->
   <section class="services-section" id="consulting-plans">
     <div class="container">
@@ -376,7 +251,6 @@
             </div>
           </div>
         </div>
-
         <!-- Card 2: Growth -->
         <div class="flip-card">
           <div class="flip-card-inner">
