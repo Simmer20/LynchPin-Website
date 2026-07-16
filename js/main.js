@@ -4,6 +4,119 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ---- Three.js hero scene with scroll-driven motion ---- */
+  const initThreeHeroScroll = () => {
+    const hero = document.getElementById('hero');
+    const canvasHost = document.getElementById('heroThreeCanvas');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!hero || !canvasHost || typeof THREE === 'undefined' || reducedMotion) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+    camera.position.set(0, 0, 8.5);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
+    canvasHost.appendChild(renderer.domElement);
+
+    const root = new THREE.Group();
+    scene.add(root);
+
+    const knot = new THREE.Mesh(
+      new THREE.TorusKnotGeometry(2.2, 0.5, 160, 24),
+      new THREE.MeshStandardMaterial({
+        color: 0xc8a46a,
+        metalness: 0.65,
+        roughness: 0.35,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.58
+      })
+    );
+    root.add(knot);
+
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particleCount = 420;
+    const positions = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount; i += 1) {
+      const i3 = i * 3;
+      positions[i3] = (Math.random() - 0.5) * 26;
+      positions[i3 + 1] = (Math.random() - 0.5) * 16;
+      positions[i3 + 2] = (Math.random() - 0.5) * 16;
+    }
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const particles = new THREE.Points(
+      particlesGeometry,
+      new THREE.PointsMaterial({
+        color: 0xe5c97c,
+        size: 0.06,
+        transparent: true,
+        opacity: 0.9,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    scene.add(particles);
+
+    const rim = new THREE.PointLight(0xe5c97c, 18, 24);
+    rim.position.set(5, 4, 5);
+    scene.add(rim);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+
+    const pointer = { x: 0, y: 0 };
+    let scrollProgress = 0;
+
+    const resize = () => {
+      const bounds = hero.getBoundingClientRect();
+      const w = Math.max(bounds.width, 1);
+      const h = Math.max(bounds.height, 1);
+      renderer.setSize(w, h);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    };
+
+    const onScroll = () => {
+      const rect = hero.getBoundingClientRect();
+      const viewport = window.innerHeight || 1;
+      const raw = 1 - Math.min(Math.max(rect.bottom / (rect.height + viewport), 0), 1);
+      scrollProgress = raw;
+    };
+
+    const onPointerMove = (e) => {
+      pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
+    };
+
+    const clock = new THREE.Clock();
+    const tick = () => {
+      const elapsed = clock.getElapsedTime();
+      const spin = elapsed * 0.18;
+
+      root.rotation.x = spin + scrollProgress * 1.05 + pointer.y * 0.08;
+      root.rotation.y = spin * 0.8 + scrollProgress * 1.3 + pointer.x * 0.1;
+      particles.rotation.y = elapsed * 0.025 + scrollProgress * 0.4;
+      particles.rotation.x = elapsed * 0.015 + scrollProgress * 0.25;
+
+      camera.position.z = 8.5 - scrollProgress * 1.5;
+      camera.position.x = pointer.x * 0.35;
+      camera.position.y = -pointer.y * 0.25;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    };
+
+    resize();
+    onScroll();
+    window.addEventListener('resize', resize);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    tick();
+  };
+
+  initThreeHeroScroll();
+
   /* ---- Navbar scroll behavior ---- */
   const navbar = document.getElementById('navbar');
 
@@ -83,10 +196,14 @@ document.addEventListener('DOMContentLoaded', () => {
     '.service-card, .about-card, .pillar, .impact-item, .feature, ' +
     '.insight-card, .team-card-main, .contact-item, .region-card, ' +
     '.pathway-card, .plan-card, .us-service-card, .strength-card, ' +
-    '.team-member-card, .gallery-item, .portfolio-entry, .logo-chip'
+    '.team-member-card, .gallery-item, .portfolio-entry, .logo-chip, ' +
+    '.partner-card, .trusted-header, .contact-tagline'
   );
 
-  fadeEls.forEach(el => el.classList.add('fade-up'));
+  fadeEls.forEach((el, idx) => {
+    el.classList.add('fade-up');
+    el.style.setProperty('--stagger-delay', `${Math.min(idx * 45, 360)}ms`);
+  });
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -114,6 +231,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.2 });
 
   sectionHeaders.forEach(el => headerObserver.observe(el));
+
+
+  /* ---- Interactive depth hover for cards ---- */
+  const depthCards = document.querySelectorAll('.pathway-card, .region-card, .partner-card, .contact-booking-card');
+  depthCards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      const tiltY = (x - 0.5) * 8;
+      const tiltX = (0.5 - y) * 6;
+      card.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-6px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
 
 
   /* ---- Animated counter for impact/hero stat numbers ---- */
