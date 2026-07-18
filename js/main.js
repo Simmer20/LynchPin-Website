@@ -4,8 +4,25 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  const LOADER_SESSION_KEY = 'lynchpin:site-loader-seen';
+
+  const shouldShowSiteLoader = () => {
+    try {
+      if (sessionStorage.getItem(LOADER_SESSION_KEY) === '1') {
+        return false;
+      }
+      sessionStorage.setItem(LOADER_SESSION_KEY, '1');
+      return true;
+    } catch (error) {
+      // If storage is unavailable, keep current behavior and show loader.
+      return true;
+    }
+  };
+
   /* ---- Immersive loading animation: connecting dots toward screen ---- */
   const initSiteLoader = () => {
+    if (!shouldShowSiteLoader()) return;
+
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reducedMotion) return;
 
