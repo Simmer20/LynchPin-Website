@@ -580,4 +580,13 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', highlightNav, { passive: true });
   }
 
+  /* ---- Dynamic copyright year ---- */
+  const yearEls = document.querySelectorAll('.js-current-year');
+  if (yearEls.length) {
+    const year = String(new Date().getFullYear());
+    yearEls.forEach((el) => {
+      el.textContent = year;
+    });
+  }
+
 });
