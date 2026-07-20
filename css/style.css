@@ -46,58 +46,6 @@ body {
   overflow-x: hidden;
 }
 
-body.is-loading {
-  overflow: hidden;
-}
-
-.site-loader {
-  position: fixed;
-  inset: 0;
-  z-index: 3000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    radial-gradient(circle at 20% 22%, rgba(200,164,106,0.16), transparent 36%),
-    radial-gradient(circle at 78% 76%, rgba(229,201,124,0.12), transparent 40%),
-    linear-gradient(160deg, #0d1b2a, #14273d 50%, #0b1623);
-  opacity: 1;
-  transition: opacity 0.7s ease, visibility 0.7s ease;
-}
-
-.site-loader.is-hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.site-loader-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.site-loader-copy {
-  position: relative;
-  text-align: center;
-  z-index: 2;
-}
-
-.site-loader-title {
-  font-family: 'Cormorant Garamond', serif;
-  color: #f5edd8;
-  font-size: clamp(1.7rem, 3.6vw, 2.8rem);
-  letter-spacing: 0.03em;
-  margin-bottom: 10px;
-}
-
-.site-loader-subtitle {
-  color: rgba(245, 237, 216, 0.78);
-  font-size: 0.83rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
 img { max-width: 100%; height: auto; display: block; }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
