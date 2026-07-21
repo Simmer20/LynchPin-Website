@@ -1536,6 +1536,12 @@ h1,h2,h3,h4,h5 {
 
 .contact-item a:hover { color: var(--gold); }
 
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .contact-tagline {
   background: rgba(200,164,106,0.06);
   border-left: 3px solid var(--gold);
