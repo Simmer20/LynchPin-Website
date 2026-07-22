@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Start Your Strategy Conversation | The LynchPin Advisory</title>
-  <meta name="description" content="Begin your strategy conversation with The LynchPin Advisory. Share your goals in a short questionnaire, then schedule your strategy session." />
+  <title>Book a Strategy Session | The LynchPin Advisory</title>
+  <meta name="description" content="Book a strategy session with The LynchPin Advisory through Calendly." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -22,11 +22,8 @@
       overflow: hidden;
     }
 
-    .book-hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 34px;
-      align-items: start;
+    .book-hero-content {
+      max-width: 760px;
     }
 
     .book-hero-title {
@@ -42,128 +39,9 @@
       max-width: 680px;
     }
 
-    .book-hero-quote {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(200,164,106,0.24);
-      border-radius: 14px;
-      padding: 20px;
-      color: rgba(255,255,255,0.78);
-      line-height: 1.7;
-    }
-
-    .book-hero-quote strong {
-      color: var(--gold-light);
-      font-weight: 600;
-    }
-
-    .book-side-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(200,164,106,0.24);
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: var(--shadow-md);
-    }
-
-    .book-side-card h3 {
-      color: var(--gold-light);
-      margin-bottom: 10px;
-      font-size: 1.7rem;
-    }
-
-    .book-side-card p {
-      color: rgba(255,255,255,0.76);
-      margin-bottom: 20px;
-      line-height: 1.75;
-    }
-
-    .book-side-card .btn {
-      width: 100%;
-      justify-content: center;
-      margin-bottom: 12px;
-    }
-
-    .book-side-note {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.84rem;
-      color: rgba(255,255,255,0.58);
-    }
-
     .book-flow {
       background: var(--cream-light);
       padding: 78px 0;
-    }
-
-    .book-flow-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 38px;
-    }
-
-    .book-flow-step {
-      background: var(--white);
-      border: 1px solid rgba(200,164,106,0.28);
-      border-radius: 14px;
-      padding: 18px;
-      text-align: center;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
-    }
-
-    .book-flow-step.is-current {
-      border-color: var(--gold);
-      box-shadow: 0 10px 24px rgba(200,164,106,0.22);
-      transform: translateY(-2px);
-    }
-
-    .book-flow-step.is-complete {
-      border-color: #2f9e62;
-      background: #ecf9f0;
-      box-shadow: 0 10px 24px rgba(47,158,98,0.2);
-    }
-
-    .book-flow-step.is-complete h4,
-    .book-flow-step.is-complete p {
-      color: #1f6f46;
-    }
-
-    .book-step-status {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 10px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      background: rgba(200,164,106,0.12);
-      color: #8a6b2f;
-      text-transform: uppercase;
-    }
-
-    .book-flow-step.is-complete .book-step-status {
-      background: rgba(47,158,98,0.14);
-      color: #1f6f46;
-    }
-
-    .book-flow-step.is-current .book-step-status {
-      background: rgba(200,164,106,0.2);
-      color: #6d531f;
-    }
-
-    .book-flow-step h4 {
-      font-size: 1.05rem;
-      color: var(--navy);
-      margin-bottom: 6px;
-    }
-
-    .book-flow-step p {
-      font-size: 0.9rem;
-      color: var(--text-body);
-      line-height: 1.55;
     }
 
     .book-panel {
@@ -172,7 +50,6 @@
       border-radius: 18px;
       padding: 24px;
       box-shadow: var(--shadow-md);
-      margin-bottom: 26px;
     }
 
     .book-panel h2 {
@@ -189,110 +66,14 @@
 
     .book-embed {
       width: 100%;
-      min-height: 860px;
+      min-height: 780px;
       border: 0;
       border-radius: 12px;
       background: rgba(23,38,58,0.04);
     }
 
-    .book-embed-calendly {
-      min-height: 760px;
-    }
-
-    .book-next-step {
-      margin-top: 14px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .book-next-step-note {
-      font-size: 0.88rem;
-      color: var(--text-body);
-      margin: 0;
-    }
-
-    .book-panel.is-locked {
-      border-color: rgba(200,164,106,0.4);
-      background: #fffefb;
-    }
-
-    .book-lock-notice {
-      margin-top: 12px;
-      border: 1px solid rgba(200,164,106,0.36);
-      background: rgba(200,164,106,0.12);
-      border-radius: 12px;
-      padding: 14px;
-      color: #6a5120;
-      font-size: 0.92rem;
-      line-height: 1.55;
-    }
-
-    .book-lock-notice strong {
-      color: #584114;
-    }
-
-    .book-lock-notice .btn {
-      margin-top: 10px;
-    }
-
-    .book-complete-message {
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      background: #ecf9f0;
-      border: 1px solid rgba(47,158,98,0.35);
-      color: #1f6f46;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .btn.is-disabled,
-    .btn[aria-disabled="true"] {
-      opacity: 0.6;
-      pointer-events: none;
-      cursor: not-allowed;
-    }
-
-    .book-toast {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      max-width: 360px;
-      background: #1f6f46;
-      color: #ffffff;
-      border-radius: 12px;
-      padding: 12px 14px;
-      box-shadow: 0 14px 32px rgba(15, 47, 30, 0.28);
-      opacity: 0;
-      transform: translateY(12px);
-      pointer-events: none;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      z-index: 1200;
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    .book-toast.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
     @media (max-width: 980px) {
-      .book-hero-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .book-flow-strip {
-        grid-template-columns: 1fr;
-      }
-
       .book-embed {
-        min-height: 760px;
-      }
-
-      .book-embed-calendly {
         min-height: 700px;
       }
     }
@@ -302,16 +83,11 @@
         padding: 136px 0 72px;
       }
 
-      .book-panel,
-      .book-side-card {
+      .book-panel {
         padding: 18px;
       }
 
       .book-embed {
-        min-height: 680px;
-      }
-
-      .book-embed-calendly {
         min-height: 650px;
       }
     }
@@ -336,7 +112,7 @@
         <a href="services.html">Services</a>
         <a href="portfolio.html">Case Studies</a>
         <a href="about.html#team">Our Team</a>
-        <a href="book.html" class="nav-cta">Start Here</a>
+        <a href="index.html#contact" class="nav-cta">Ready to Scale?</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -345,86 +121,26 @@
   </header>
 
   <section class="book-hero">
-    <div class="container book-hero-grid">
-      <div>
-        <p class="hero-eyebrow">Start Your Strategy Conversation</p>
-        <h1 class="book-hero-title">Tell us about your goals, then pick your time.</h1>
-        <p class="book-hero-intro">Before scheduling, we'd like to understand your organization and objectives.</p>
-        <div class="book-hero-quote">
-          <strong>What to expect:</strong> a short pre-call questionnaire, then immediate access to the LynchPin scheduling calendar.
-        </div>
-      </div>
-
-      <aside class="book-side-card">
-        <h3>2-Step Booking Flow</h3>
-        <p>Step 1: complete the questionnaire in about two minutes.<br />Step 2: choose a meeting time that works for you.</p>
-        <a href="#questionnaire" class="btn btn-gold" id="startQuestionnaireBtn">Start Questionnaire</a>
-        <!-- <p class="book-side-note"><i class="fas fa-shield-alt"></i> No custom website backend required. Responses are handled in Google Forms.</p> -->
-      </aside>
+    <div class="container book-hero-content">
+      <p class="hero-eyebrow">Book Your Session</p>
+      <h1 class="book-hero-title">Choose a time for your strategy call.</h1>
+      <p class="book-hero-intro">Schedule directly through Calendly. We will come prepared to discuss your market goals and growth priorities.</p>
+      <a href="#schedule" class="btn btn-gold">Open Scheduling Calendar</a>
     </div>
   </section>
 
-  <section class="book-flow" id="questionnaire">
+  <section class="book-flow" id="schedule">
     <div class="container">
-      <div class="book-flow-strip" aria-label="Booking progress">
-        <article class="book-flow-step" data-step="1">
-          <h4>1. Start Questionnaire</h4>
-          <p>Share details about your organization, priorities, and stage so we can prepare well.</p>
-          <span class="book-step-status">Pending</span>
-        </article>
-        <article class="book-flow-step" data-step="2">
-          <h4>2. Submit Responses</h4>
-          <p>Once submitted, you will see the next step to book your strategy session.</p>
-          <span class="book-step-status">Pending</span>
-        </article>
-        <article class="book-flow-step" data-step="3">
-          <h4>3. Book Calendly Slot</h4>
-          <p>Choose the best time and we will come ready with context from your responses.</p>
-          <span class="book-step-status">Pending</span>
-        </article>
-      </div>
-
-      <article class="book-panel" id="questionnairePanel">
-        <h2>Google Form</h2>
-        <p>Complete this short questionnaire first, then continue to scheduling.</p>
-        <iframe
-          title="LynchPin Pre-Call Questionnaire"
-          src="https://docs.google.com/forms/d/e/1FAIpQLSdLT9VlCa61Dvgx415buKs4l5z6GkrSTiwlQx8lTDDlDYuodA/viewform?embedded=true"
-          class="book-embed"
-          loading="lazy">
-          Loading questionnaire...
-        </iframe>
-
-        <div class="book-next-step">
-          <a href="#schedule" class="btn btn-primary" id="questionnaireDoneBtn">I Submitted the Questionnaire</a>
-          <p class="book-next-step-note">After submitting the form, continue to Step 3 and choose your meeting time.</p>
-        </div>
-        <p class="book-complete-message" id="questionnaireCompletedMessage" hidden>Questionnaire already completed. You cannot submit this stage again.</p>
-
-      </article>
-
-      <article class="book-panel" id="schedule">
-        <h2>Calendly</h2>
-        <p>After submitting the questionnaire, select your preferred meeting slot below.</p>
-        <div class="book-lock-notice" id="scheduleLockNotice" hidden>
-          <strong>Booking is locked.</strong> Complete and confirm the questionnaire first, then this stage will unlock automatically.
-          <div>
-            <a href="#questionnairePanel" class="btn btn-outline" id="backToQuestionnaireBtn">Go to Questionnaire</a>
-          </div>
-        </div>
+      <article class="book-panel">
+        <h2>Calendly Booking</h2>
+        <p>Select a convenient time below to book your strategy session with The LynchPin Advisory.</p>
         <iframe
           title="Book Your Strategy Session"
-          data-src="https://calendly.com/thelynchpinconsultants?hide_gdpr_banner=1"
-          class="book-embed book-embed-calendly"
+          src="https://calendly.com/thelynchpinconsultants?hide_gdpr_banner=1"
+          class="book-embed"
           loading="lazy">
           Loading calendar...
         </iframe>
-
-        <div class="book-next-step" id="scheduleActions">
-          <a href="#schedule" class="btn btn-primary" id="calendlyDoneBtn">I Booked My Strategy Session</a>
-          <p class="book-next-step-note">Click after booking so we can mark this process as complete on your device.</p>
-        </div>
-        <p class="book-complete-message" id="calendlyCompletedMessage" hidden>Strategy session already booked. This stage is complete.</p>
       </article>
     </div>
   </section>
@@ -455,10 +171,10 @@
           </ul>
         </div>
         <div class="footer-links">
-          <h4>Next Steps</h4>
+          <h4>Booking</h4>
           <ul>
-            <li><a href="#questionnaire">Start Questionnaire</a></li>
-            <li><a href="#schedule">Book Session</a></li>
+            <li><a href="#schedule">Schedule a Session</a></li>
+            <li><a href="index.html#contact">Contact Us</a></li>
             <li><a href="index.html#contact">Contact Details</a></li>
           </ul>
         </div>
@@ -480,279 +196,5 @@
   </footer>
 
   <script src="js/main.js"></script>
-  <script>
-    (function () {
-      const storageKey = 'lynchpin-book-flow-v1';
-      const steps = Array.from(document.querySelectorAll('.book-flow-step'));
-      const startButton = document.getElementById('startQuestionnaireBtn');
-      const submittedButton = document.getElementById('questionnaireDoneBtn');
-      const calendlyDoneButton = document.getElementById('calendlyDoneBtn');
-      const questionnairePanel = document.getElementById('questionnairePanel');
-      const schedulePanel = document.getElementById('schedule');
-      const scheduleLockNotice = document.getElementById('scheduleLockNotice');
-      const scheduleActions = document.getElementById('scheduleActions');
-      const backToQuestionnaireButton = document.getElementById('backToQuestionnaireBtn');
-      const questionnaireIframe = questionnairePanel ? questionnairePanel.querySelector('.book-embed') : null;
-      const calendlyIframe = schedulePanel ? schedulePanel.querySelector('.book-embed-calendly') : null;
-      const questionnaireCompletedMessage = document.getElementById('questionnaireCompletedMessage');
-      const calendlyCompletedMessage = document.getElementById('calendlyCompletedMessage');
-      let toastTimeoutId;
-
-      let state = {
-        started: false,
-        formSubmitted: false,
-        calendlyBooked: false
-      };
-
-      function loadState() {
-        try {
-          const stored = localStorage.getItem(storageKey);
-          if (!stored) {
-            return;
-          }
-
-          const parsed = JSON.parse(stored);
-          state = {
-            started: Boolean(parsed && parsed.started),
-            formSubmitted: Boolean(parsed && parsed.formSubmitted),
-            calendlyBooked: Boolean(parsed && parsed.calendlyBooked)
-          };
-        } catch (err) {
-          state = {
-            started: false,
-            formSubmitted: false,
-            calendlyBooked: false
-          };
-        }
-      }
-
-      function saveState() {
-        try {
-          localStorage.setItem(storageKey, JSON.stringify(state));
-        } catch (err) {
-          // Ignore storage errors and keep UI functional.
-        }
-      }
-
-      let completedStep = 0;
-
-      function disableButton(button, label) {
-        if (!button) {
-          return;
-        }
-
-        button.classList.add('is-disabled');
-        button.setAttribute('aria-disabled', 'true');
-        button.removeAttribute('href');
-        button.textContent = label;
-      }
-
-      function showElement(element) {
-        if (element) {
-          element.hidden = false;
-        }
-      }
-
-      function hideElement(element) {
-        if (element) {
-          element.hidden = true;
-        }
-      }
-
-      function loadCalendlyEmbed() {
-        if (!calendlyIframe) {
-          return;
-        }
-
-        if (calendlyIframe.getAttribute('src')) {
-          return;
-        }
-
-        const embedSource = calendlyIframe.getAttribute('data-src');
-        if (embedSource) {
-          calendlyIframe.setAttribute('src', embedSource);
-        }
-      }
-
-      function setScheduleLocked(isLocked) {
-        if (!schedulePanel) {
-          return;
-        }
-
-        schedulePanel.classList.toggle('is-locked', isLocked);
-
-        if (isLocked) {
-          showElement(scheduleLockNotice);
-          if (calendlyIframe) {
-            calendlyIframe.hidden = true;
-          }
-          hideElement(scheduleActions);
-        } else {
-          hideElement(scheduleLockNotice);
-          if (calendlyIframe && !state.calendlyBooked) {
-            calendlyIframe.hidden = false;
-          }
-          if (!state.calendlyBooked) {
-            showElement(scheduleActions);
-          }
-          loadCalendlyEmbed();
-        }
-      }
-
-      function showToast(message) {
-        let toast = document.getElementById('bookToast');
-
-        if (!toast) {
-          toast = document.createElement('div');
-          toast.id = 'bookToast';
-          toast.className = 'book-toast';
-          toast.setAttribute('role', 'status');
-          toast.setAttribute('aria-live', 'polite');
-          document.body.appendChild(toast);
-        }
-
-        toast.textContent = message;
-        toast.classList.add('is-visible');
-
-        if (toastTimeoutId) {
-          clearTimeout(toastTimeoutId);
-        }
-
-        toastTimeoutId = setTimeout(function () {
-          toast.classList.remove('is-visible');
-        }, 2500);
-      }
-
-      function syncFromState() {
-        if (state.calendlyBooked) {
-          completedStep = 3;
-        } else if (state.formSubmitted) {
-          completedStep = 2;
-        } else if (state.started) {
-          completedStep = 1;
-        } else {
-          completedStep = 0;
-        }
-
-        if (state.formSubmitted) {
-          if (questionnaireIframe) {
-            questionnaireIframe.hidden = true;
-          }
-          showElement(questionnaireCompletedMessage);
-          disableButton(submittedButton, 'Questionnaire Already Completed');
-          disableButton(startButton, 'Questionnaire Completed');
-        } else {
-          hideElement(questionnaireCompletedMessage);
-        }
-
-        setScheduleLocked(!state.formSubmitted);
-
-        if (state.calendlyBooked) {
-          if (calendlyIframe) {
-            calendlyIframe.hidden = true;
-          }
-          showElement(calendlyCompletedMessage);
-          disableButton(calendlyDoneButton, 'Session Already Booked');
-          hideElement(scheduleActions);
-        } else {
-          hideElement(calendlyCompletedMessage);
-        }
-
-        paintProgress();
-      }
-
-      function paintProgress() {
-        steps.forEach((stepCard, index) => {
-          const stepNumber = index + 1;
-          const status = stepCard.querySelector('.book-step-status');
-          const isComplete = stepNumber <= completedStep;
-          const isCurrent = stepNumber === Math.min(completedStep + 1, 3) && completedStep < 3;
-
-          stepCard.classList.toggle('is-complete', isComplete);
-          stepCard.classList.toggle('is-current', isCurrent);
-
-          if (status) {
-            if (isComplete) {
-              status.textContent = 'Completed';
-            } else if (isCurrent) {
-              status.textContent = 'In Progress';
-            } else {
-              status.textContent = 'Pending';
-            }
-          }
-        });
-      }
-
-      if (startButton) {
-        startButton.addEventListener('click', function (event) {
-          if (state.formSubmitted) {
-            event.preventDefault();
-            return;
-          }
-
-          state.started = true;
-          saveState();
-          syncFromState();
-        });
-      }
-
-      if (submittedButton) {
-        submittedButton.addEventListener('click', function (event) {
-          if (state.formSubmitted) {
-            event.preventDefault();
-            return;
-          }
-
-          event.preventDefault();
-          state.started = true;
-          state.formSubmitted = true;
-          saveState();
-          syncFromState();
-          showToast('Great next step. Questionnaire completed. Moving to scheduling.');
-
-          if (schedulePanel) {
-            schedulePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      }
-
-      if (calendlyDoneButton) {
-        calendlyDoneButton.addEventListener('click', function (event) {
-          if (!state.formSubmitted) {
-            event.preventDefault();
-            showToast('Please submit the questionnaire first to unlock scheduling.');
-            if (questionnairePanel) {
-              questionnairePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-            return;
-          }
-
-          if (state.calendlyBooked) {
-            event.preventDefault();
-            return;
-          }
-
-          event.preventDefault();
-          state.started = true;
-          state.formSubmitted = true;
-          state.calendlyBooked = true;
-          saveState();
-          syncFromState();
-          showToast('Great next step. Your strategy session is marked complete.');
-        });
-      }
-
-      if (backToQuestionnaireButton) {
-        backToQuestionnaireButton.addEventListener('click', function () {
-          if (questionnairePanel) {
-            questionnairePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      }
-
-      loadState();
-      syncFromState();
-    })();
-  </script>
 </body>
 </html>
