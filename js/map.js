@@ -168,6 +168,27 @@ document.addEventListener('DOMContentLoaded', () => {
     mapNoteEl.innerHTML = `<i class="fas fa-info-circle"></i> ${text}`;
   };
 
+  const resetMapViewport = () => {
+    // Try known jsVectorMap APIs in order; fallback is harmless no-op.
+    const resetAttempts = [
+      () => (typeof map.reset === 'function' ? map.reset() : null),
+      () => (typeof map.setFocus === 'function' ? map.setFocus({ scale: 1, lat: 0, lng: 0, animate: true }) : null),
+      () => (typeof map.setFocus === 'function' ? map.setFocus({ scale: 1, x: 0.5, y: 0.5, animate: true }) : null)
+    ];
+
+    for (const attempt of resetAttempts) {
+      try {
+        attempt();
+      } catch (_) {
+        // Continue to the next fallback.
+      }
+    }
+
+    if (map && map.updateSize) {
+      map.updateSize();
+    }
+  };
+
   const setActiveRegion = (activeRegion = null) => {
     applyRegionStyles(activeRegion);
     applyMarkerStyles(activeRegion);
@@ -198,7 +219,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   if (mapResetBtn) {
-    mapResetBtn.addEventListener('click', () => setActiveRegion(null));
+    mapResetBtn.addEventListener('click', () => {
+      setActiveRegion(null);
+      resetMapViewport();
+    });
   }
 
   window.addEventListener('resize', () => {

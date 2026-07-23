@@ -280,7 +280,8 @@ document.addEventListener('DOMContentLoaded', () => {
     '.insight-card, .team-card-main, .contact-item, .region-card, ' +
     '.pathway-card, .plan-card, .us-service-card, .strength-card, ' +
     '.team-member-card, .gallery-item, .portfolio-entry, .logo-chip, ' +
-    '.partner-card, .trusted-header, .contact-tagline, .purpose-card, .purpose-intro'
+    '.partner-card, .trusted-header, .contact-tagline, .purpose-card, .purpose-intro, ' +
+    '.lynchpin-meaning-card, .difference-card, .leadership-card, .featured-case-card'
   );
 
   fadeEls.forEach((el, idx) => {
