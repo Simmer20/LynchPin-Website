@@ -381,6 +381,61 @@ document.addEventListener('DOMContentLoaded', () => {
   counters.forEach(el => counterObserver.observe(el));
 
 
+  /* ---- Insights tabs and LinkedIn quick actions ---- */
+  const insightTabs = document.querySelectorAll('.insights-tab');
+  const insightCards = document.querySelectorAll('.insight-card[data-insight-type]');
+
+  if (insightTabs.length && insightCards.length) {
+    insightTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const filter = tab.getAttribute('data-insight-filter') || 'all';
+
+        insightTabs.forEach((t) => {
+          const isActive = t === tab;
+          t.classList.toggle('is-active', isActive);
+          t.setAttribute('aria-selected', String(isActive));
+        });
+
+        insightCards.forEach((card) => {
+          const type = card.getAttribute('data-insight-type');
+          const show = filter === 'all' || type === filter;
+          card.classList.toggle('is-hidden', !show);
+        });
+      });
+    });
+  }
+
+  const toLinkedInShareUrl = (url) => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+
+  document.querySelectorAll('[data-copy-linkedin]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const card = btn.closest('[data-linkedin-url]');
+      const url = card ? card.getAttribute('data-linkedin-url') : '';
+      if (!url) return;
+
+      const originalText = btn.textContent;
+      try {
+        await navigator.clipboard.writeText(url);
+        btn.textContent = 'Copied';
+      } catch (_) {
+        window.prompt('Copy this LinkedIn URL:', url);
+      }
+      setTimeout(() => {
+        btn.textContent = originalText;
+      }, 1600);
+    });
+  });
+
+  document.querySelectorAll('[data-share-linkedin]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('[data-linkedin-url]');
+      const url = card ? card.getAttribute('data-linkedin-url') : '';
+      if (!url) return;
+      window.open(toLinkedInShareUrl(url), '_blank', 'noopener');
+    });
+  });
+
+
   /* ---- Founder photo slider (Services page) ---- */
   const founderSliders = document.querySelectorAll('.founder-slider');
 
