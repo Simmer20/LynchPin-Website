@@ -535,14 +535,28 @@ document.addEventListener('DOMContentLoaded', () => {
   counters.forEach(el => counterObserver.observe(el));
 
 
-  /* ---- Insights tabs and LinkedIn quick actions ---- */
+  /* ---- Insights tabs and article quick actions ---- */
   const insightTabs = document.querySelectorAll('.insights-tab');
+  const insightAuthorTabs = document.querySelectorAll('.insights-author-tab');
   const insightCards = document.querySelectorAll('.insight-card[data-insight-type]');
 
-  if (insightTabs.length && insightCards.length) {
+  if ((insightTabs.length || insightAuthorTabs.length) && insightCards.length) {
+    let activeTypeFilter = 'all';
+    let activeAuthorFilter = 'all';
+
+    const applyInsightFilters = () => {
+      insightCards.forEach((card) => {
+        const type = card.getAttribute('data-insight-type') || '';
+        const author = card.getAttribute('data-insight-author') || 'unknown';
+        const typeMatch = activeTypeFilter === 'all' || type === activeTypeFilter;
+        const authorMatch = activeAuthorFilter === 'all' || author === activeAuthorFilter;
+        card.classList.toggle('is-hidden', !(typeMatch && authorMatch));
+      });
+    };
+
     insightTabs.forEach((tab) => {
       tab.addEventListener('click', () => {
-        const filter = tab.getAttribute('data-insight-filter') || 'all';
+        activeTypeFilter = tab.getAttribute('data-insight-filter') || 'all';
 
         insightTabs.forEach((t) => {
           const isActive = t === tab;
@@ -550,21 +564,41 @@ document.addEventListener('DOMContentLoaded', () => {
           t.setAttribute('aria-selected', String(isActive));
         });
 
-        insightCards.forEach((card) => {
-          const type = card.getAttribute('data-insight-type');
-          const show = filter === 'all' || type === filter;
-          card.classList.toggle('is-hidden', !show);
-        });
+        applyInsightFilters();
       });
     });
+
+    insightAuthorTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        activeAuthorFilter = tab.getAttribute('data-insight-author-filter') || 'all';
+
+        insightAuthorTabs.forEach((t) => {
+          const isActive = t === tab;
+          t.classList.toggle('is-active', isActive);
+          t.setAttribute('aria-selected', String(isActive));
+        });
+
+        applyInsightFilters();
+      });
+    });
+
+    applyInsightFilters();
   }
 
   const toLinkedInShareUrl = (url) => `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+  const getInsightUrl = (btn) => {
+    const card = btn.closest('[data-insight-url], [data-linkedin-url]');
+    if (!card) return '';
 
-  document.querySelectorAll('[data-copy-linkedin]').forEach((btn) => {
+    const raw = card.getAttribute('data-insight-url') || card.getAttribute('data-linkedin-url') || '';
+    if (!raw) return '';
+
+    return /^https?:\/\//i.test(raw) ? raw : new URL(raw, window.location.href).href;
+  };
+
+  document.querySelectorAll('[data-copy-insight], [data-copy-linkedin]').forEach((btn) => {
     btn.addEventListener('click', async () => {
-      const card = btn.closest('[data-linkedin-url]');
-      const url = card ? card.getAttribute('data-linkedin-url') : '';
+      const url = getInsightUrl(btn);
       if (!url) return;
 
       const originalText = btn.textContent;
@@ -572,7 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
         await navigator.clipboard.writeText(url);
         btn.textContent = 'Copied';
       } catch (_) {
-        window.prompt('Copy this LinkedIn URL:', url);
+        window.prompt('Copy this article URL:', url);
       }
       setTimeout(() => {
         btn.textContent = originalText;
@@ -580,10 +614,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  document.querySelectorAll('[data-share-linkedin]').forEach((btn) => {
+  document.querySelectorAll('[data-share-insight], [data-share-linkedin]').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const card = btn.closest('[data-linkedin-url]');
-      const url = card ? card.getAttribute('data-linkedin-url') : '';
+      const url = getInsightUrl(btn);
       if (!url) return;
       window.open(toLinkedInShareUrl(url), '_blank', 'noopener');
     });

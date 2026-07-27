@@ -2071,7 +2071,23 @@ h1,h2,h3,h4,h5 {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-bottom: 14px;
+}
+
+.insights-author-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 28px;
+}
+
+.insights-filter-label {
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--navy);
 }
 
 .insights-tab {
@@ -2087,8 +2103,28 @@ h1,h2,h3,h4,h5 {
   transition: var(--transition);
 }
 
+.insights-author-tab {
+  border: 1px solid rgba(200,164,106,0.35);
+  border-radius: 999px;
+  background: rgba(200,164,106,0.08);
+  color: var(--navy);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 9px 16px;
+  transition: var(--transition);
+}
+
 .insights-tab:hover,
 .insights-tab.is-active {
+  background: var(--navy-dark);
+  color: var(--gold-light);
+  border-color: rgba(200,164,106,0.6);
+}
+
+.insights-author-tab:hover,
+.insights-author-tab.is-active {
   background: var(--navy-dark);
   color: var(--gold-light);
   border-color: rgba(200,164,106,0.6);
@@ -2152,11 +2188,20 @@ h1,h2,h3,h4,h5 {
   margin-bottom: 20px;
 }
 
+.insight-author {
+  font-size: 0.77rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 14px;
+}
+
 .insight-excerpt {
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  display: block;
+  overflow: visible;
 }
 
 .insight-meta {
@@ -2232,6 +2277,127 @@ h1,h2,h3,h4,h5 {
 
 .insight-card.is-hidden {
   display: none;
+}
+
+/* ============================================================
+   WHO WE WORK WITH
+   ============================================================ */
+.who-we-work-section {
+  background: linear-gradient(180deg, #f7f1e5 0%, var(--cream-light) 100%);
+}
+
+.who-we-work-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.who-we-work-card {
+  background: var(--white);
+  border: 1px solid rgba(200,164,106,0.2);
+  border-radius: var(--radius-md);
+  padding: 28px 22px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.who-we-work-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(200,164,106,0.55);
+  box-shadow: var(--shadow-md);
+}
+
+.who-we-work-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,164,106,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.who-we-work-card h3 {
+  color: var(--navy);
+  margin: 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .who-we-work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .who-we-work-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.insights-library-section {
+  background: linear-gradient(180deg, var(--cream-light) 0%, #f6f0e4 100%);
+}
+
+.insights-library-grid {
+  display: grid;
+  gap: 28px;
+}
+
+.insights-article {
+  background: var(--white);
+  border: 1px solid rgba(200,164,106,0.2);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 34px;
+}
+
+.insights-article h2 {
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+
+.insights-article .insight-meta {
+  margin-top: 0;
+  margin-bottom: 18px;
+  padding-top: 0;
+  padding-bottom: 16px;
+}
+
+.insights-article .article-body {
+  display: grid;
+  gap: 14px;
+}
+
+.insights-article .article-body p {
+  margin: 0;
+  color: var(--text-body);
+  line-height: 1.8;
+}
+
+.insights-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.insights-back-link:hover {
+  gap: 12px;
 }
 
 /* ============================================================
