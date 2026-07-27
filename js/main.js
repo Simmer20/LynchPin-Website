@@ -4,6 +4,160 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ---- Intro section refresh reveal ---- */
+  const introSection = document.querySelector('.intro-statement-section');
+  if (introSection) {
+    requestAnimationFrame(() => {
+      introSection.classList.add('intro-ready');
+    });
+  }
+
+  /* ---- Three.js intro particles with strong scroll motion ---- */
+  const initIntroThreeScroll = () => {
+    const intro = document.querySelector('.intro-statement-section');
+    const canvasHost = document.getElementById('introThreeCanvas');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!intro || !canvasHost || typeof THREE === 'undefined' || reducedMotion) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(56, 1, 0.1, 100);
+    camera.position.set(0, 0, 8.5);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.9));
+    canvasHost.appendChild(renderer.domElement);
+
+    const starsGeo = new THREE.BufferGeometry();
+    const starsCount = 2200;
+    const starsPos = new Float32Array(starsCount * 3);
+    const starsScale = new Float32Array(starsCount);
+
+    for (let i = 0; i < starsCount; i += 1) {
+      const i3 = i * 3;
+      starsPos[i3] = (Math.random() - 0.5) * 34;
+      starsPos[i3 + 1] = (Math.random() - 0.5) * 22;
+      starsPos[i3 + 2] = (Math.random() - 0.5) * 24;
+      starsScale[i] = Math.random();
+    }
+
+    starsGeo.setAttribute('position', new THREE.BufferAttribute(starsPos, 3));
+
+    const stars = new THREE.Points(
+      starsGeo,
+      new THREE.PointsMaterial({
+        color: 0xf5edd8,
+        size: 0.075,
+        transparent: true,
+        opacity: 0.88,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    scene.add(stars);
+
+    const goldGeo = new THREE.BufferGeometry();
+    const goldCount = 620;
+    const goldPos = new Float32Array(goldCount * 3);
+    for (let i = 0; i < goldCount; i += 1) {
+      const i3 = i * 3;
+      goldPos[i3] = (Math.random() - 0.5) * 20;
+      goldPos[i3 + 1] = (Math.random() - 0.5) * 14;
+      goldPos[i3 + 2] = (Math.random() - 0.5) * 14;
+    }
+    goldGeo.setAttribute('position', new THREE.BufferAttribute(goldPos, 3));
+
+    const goldCloud = new THREE.Points(
+      goldGeo,
+      new THREE.PointsMaterial({
+        color: 0xc8a46a,
+        size: 0.11,
+        transparent: true,
+        opacity: 0.34,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    scene.add(goldCloud);
+
+    const halo = new THREE.Mesh(
+      new THREE.TorusGeometry(2.8, 0.06, 24, 180),
+      new THREE.MeshBasicMaterial({ color: 0xc8a46a, transparent: true, opacity: 0.35 })
+    );
+    halo.rotation.x = 1.1;
+    scene.add(halo);
+
+    const ambient = new THREE.AmbientLight(0xffffff, 0.45);
+    scene.add(ambient);
+    const point = new THREE.PointLight(0xe5c97c, 18, 26);
+    point.position.set(4.5, 3.5, 6);
+    scene.add(point);
+
+    let scrollProgress = 0;
+    const pointer = { x: 0, y: 0 };
+
+    const resize = () => {
+      const bounds = intro.getBoundingClientRect();
+      const w = Math.max(bounds.width, 1);
+      const h = Math.max(bounds.height, 1);
+      renderer.setSize(w, h);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    };
+
+    const onScroll = () => {
+      const rect = intro.getBoundingClientRect();
+      const viewport = window.innerHeight || 1;
+      const progress = Math.min(Math.max((viewport - rect.top) / (rect.height + viewport), 0), 1);
+      scrollProgress = progress;
+    };
+
+    const onPointerMove = (e) => {
+      pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
+    };
+
+    const clock = new THREE.Clock();
+    const tick = () => {
+      const elapsed = clock.getElapsedTime();
+
+      const positions = starsGeo.attributes.position.array;
+      for (let i = 0; i < starsCount; i += 1) {
+        const i3 = i * 3;
+        positions[i3 + 1] += 0.0038 + starsScale[i] * 0.0018;
+        positions[i3] += Math.sin(elapsed * 0.24 + i) * 0.0005;
+        if (positions[i3 + 1] > 10.8) {
+          positions[i3 + 1] = -10.8;
+        }
+      }
+      starsGeo.attributes.position.needsUpdate = true;
+
+      stars.rotation.y = elapsed * 0.024 + scrollProgress * 0.65;
+      stars.rotation.x = elapsed * 0.01 + scrollProgress * 0.3;
+      goldCloud.rotation.y = -elapsed * 0.022;
+      goldCloud.rotation.x = Math.sin(elapsed * 0.35) * 0.12 + scrollProgress * 0.22;
+      halo.rotation.z = elapsed * 0.18 + scrollProgress * 1.2;
+      halo.scale.setScalar(1 + scrollProgress * 0.18);
+
+      camera.position.z = 8.7 - scrollProgress * 1.25;
+      camera.position.x = pointer.x * 0.42;
+      camera.position.y = -pointer.y * 0.3;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    };
+
+    resize();
+    onScroll();
+    window.addEventListener('resize', resize);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    tick();
+  };
+
+  initIntroThreeScroll();
+
   /* ---- Three.js hero particles with scroll-driven drift ---- */
   const initThreeHeroScroll = () => {
     const hero = document.getElementById('hero');
