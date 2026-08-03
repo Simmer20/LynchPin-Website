@@ -87,26 +87,86 @@
       margin: 0;
     }
 
-    .event-gallery {
+    .event-carousel {
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+      position: relative;
       overflow: hidden;
       border-radius: 12px;
-      position: relative;
+      line-height: 0;
     }
 
-    .gallery-track {
+    .event-slide {
+      display: none;
+    }
+
+    .event-slide.active {
+      display: block;
+    }
+
+    .event-slide img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: min(68vh, 520px);
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .event-carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.8);
+      background: rgba(13,27,42,0.35);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      z-index: 2;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .event-carousel-btn:hover {
+      background: rgba(13,27,42,0.72);
+    }
+
+    .event-carousel-btn.prev {
+      left: 10px;
+    }
+
+    .event-carousel-btn.next {
+      right: 10px;
+    }
+
+    .event-carousel-dots {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
       display: flex;
-      gap: 14px;
-      animation: scrollGallery 20s linear infinite;
-      width: max-content;
+      gap: 8px;
+      z-index: 2;
     }
 
-    .event-gallery:hover .gallery-track {
-      animation-play-state: paused;
+    .event-carousel-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.45);
+      padding: 0;
     }
 
-    @keyframes scrollGallery {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    .event-carousel-dot.active {
+      background: #d4af37;
+      border-color: #d4af37;
     }
 
     /* ================= RESPONSIVE ================= */
@@ -122,9 +182,13 @@
       .event-details {
         grid-template-columns: 1fr 1fr;
       }
-      .event-gallery .gallery-track img {
-        height: 160px;
-        max-width: 240px;
+      .event-slide img {
+        max-height: min(58vh, 420px);
+      }
+
+      .event-carousel-btn {
+        width: 42px;
+        height: 42px;
       }
     }
 
@@ -136,9 +200,13 @@
         grid-template-columns: 1fr;
         gap: 10px;
       }
-      .event-gallery .gallery-track img {
-        height: 120px;
-        max-width: 180px;
+      .event-slide img {
+        max-height: min(52vh, 320px);
+      }
+
+      .event-carousel-btn {
+        width: 38px;
+        height: 38px;
       }
       .event-info h3 {
         font-size: 1.2rem;
@@ -187,7 +255,6 @@
         <a href="services.html" class="active">Services</a>
         <a href="case-studies.html">Case Studies</a>
         <a href="insights.html">Insights</a>
-        <a href="about.html#team">Our Team</a>
         <a href="index.html#contact" class="nav-cta">Ready to Scale?</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu">
@@ -377,12 +444,22 @@
       </div>
     </div>
   </div>
-  <div class="event-gallery">
-    <div class="gallery-track">
-      <img src="images/sunking-1.jpg" alt="SunKing panel photo 1" />
-      <img src="images/sunking-4.jpg" alt="SunKing panel photo 2" />
-      <img src="images/sunking-1.jpg" alt="SunKing panel photo 1" />
-      <img src="images/sunking-4.jpg" alt="SunKing panel photo 2" />
+  <div class="event-carousel" aria-label="SunKing event photos">
+    <div class="event-slide active">
+      <img src="images/sunking-5.jpeg" alt="SunKing panel photo 1" />
+    </div>
+    <div class="event-slide">
+      <img src="images/sunking-3.jpg" alt="SunKing panel photo 2" />
+    </div>
+    <button class="event-carousel-btn prev" type="button" aria-label="Show previous SunKing photo">
+      <i class="fas fa-chevron-left" aria-hidden="true"></i>
+    </button>
+    <button class="event-carousel-btn next" type="button" aria-label="Show next SunKing photo">
+      <i class="fas fa-chevron-right" aria-hidden="true"></i>
+    </button>
+    <div class="event-carousel-dots" role="tablist" aria-label="SunKing photo navigation">
+      <button class="event-carousel-dot active" type="button" role="tab" aria-label="Show SunKing photo 1" aria-selected="true" data-slide="0"></button>
+      <button class="event-carousel-dot" type="button" role="tab" aria-label="Show SunKing photo 2" aria-selected="false" data-slide="1"></button>
     </div>
   </div>
 </div>
@@ -411,12 +488,22 @@
       </div>
     </div>
   </div>
-  <div class="event-gallery">
-    <div class="gallery-track">
+  <div class="event-carousel" aria-label="COP28 event photos">
+    <div class="event-slide active">
       <img src="images/COP28.jpeg" alt="COP28 photo 1" />
+    </div>
+    <div class="event-slide">
       <img src="images/COP28-2.jpeg" alt="COP28 photo 2" />
-      <img src="images/COP28.jpeg" alt="COP28 photo 1" />
-      <img src="images/COP28-2.jpeg" alt="COP28 photo 2" />
+    </div>
+    <button class="event-carousel-btn prev" type="button" aria-label="Show previous COP28 photo">
+      <i class="fas fa-chevron-left" aria-hidden="true"></i>
+    </button>
+    <button class="event-carousel-btn next" type="button" aria-label="Show next COP28 photo">
+      <i class="fas fa-chevron-right" aria-hidden="true"></i>
+    </button>
+    <div class="event-carousel-dots" role="tablist" aria-label="COP28 photo navigation">
+      <button class="event-carousel-dot active" type="button" role="tab" aria-label="Show COP28 photo 1" aria-selected="true" data-slide="0"></button>
+      <button class="event-carousel-dot" type="button" role="tab" aria-label="Show COP28 photo 2" aria-selected="false" data-slide="1"></button>
     </div>
   </div>
 </div>
@@ -445,12 +532,22 @@
       </div>
     </div>
   </div>
-  <div class="event-gallery">
-    <div class="gallery-track">
+  <div class="event-carousel" aria-label="DPI summit event photos">
+    <div class="event-slide active">
       <img src="images/Govstack.jpeg" alt="DPI Summit photo 1" />
+    </div>
+    <div class="event-slide">
       <img src="images/Kofisi-pic.jpeg" alt="DPI Summit photo 2" />
-      <img src="images/Govstack.jpeg" alt="DPI Summit photo 1" />
-      <img src="images/Kofisi-pic.jpeg" alt="DPI Summit photo 2" />
+    </div>
+    <button class="event-carousel-btn prev" type="button" aria-label="Show previous DPI summit photo">
+      <i class="fas fa-chevron-left" aria-hidden="true"></i>
+    </button>
+    <button class="event-carousel-btn next" type="button" aria-label="Show next DPI summit photo">
+      <i class="fas fa-chevron-right" aria-hidden="true"></i>
+    </button>
+    <div class="event-carousel-dots" role="tablist" aria-label="DPI summit photo navigation">
+      <button class="event-carousel-dot active" type="button" role="tab" aria-label="Show DPI summit photo 1" aria-selected="true" data-slide="0"></button>
+      <button class="event-carousel-dot" type="button" role="tab" aria-label="Show DPI summit photo 2" aria-selected="false" data-slide="1"></button>
     </div>
   </div>
 </div>
@@ -479,12 +576,22 @@
       </div>
     </div>
   </div>
-  <div class="event-gallery">
-    <div class="gallery-track">
+  <div class="event-carousel" aria-label="ITM Africa event photos">
+    <div class="event-slide active">
       <img src="images/itm-1.jpg" alt="ITM Africa panel photo 1" />
+    </div>
+    <div class="event-slide">
       <img src="images/itm-2.jpg" alt="ITM Africa panel photo 2" />
-      <img src="images/itm-1.jpg" alt="ITM Africa panel photo 1" />
-      <img src="images/itm-2.jpg" alt="ITM Africa panel photo 2" />
+    </div>
+    <button class="event-carousel-btn prev" type="button" aria-label="Show previous ITM Africa photo">
+      <i class="fas fa-chevron-left" aria-hidden="true"></i>
+    </button>
+    <button class="event-carousel-btn next" type="button" aria-label="Show next ITM Africa photo">
+      <i class="fas fa-chevron-right" aria-hidden="true"></i>
+    </button>
+    <div class="event-carousel-dots" role="tablist" aria-label="ITM Africa photo navigation">
+      <button class="event-carousel-dot active" type="button" role="tab" aria-label="Show ITM Africa photo 1" aria-selected="true" data-slide="0"></button>
+      <button class="event-carousel-dot" type="button" role="tab" aria-label="Show ITM Africa photo 2" aria-selected="false" data-slide="1"></button>
     </div>
   </div>
 </div>
@@ -621,7 +728,6 @@
             <li><a href="about.html">About Us</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="case-studies.html">Case Studies</a></li>
-            <li><a href="about.html#team">Our Team</a></li>
           </ul>
         </div>
         <div class="footer-links">

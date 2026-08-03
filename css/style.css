@@ -80,7 +80,8 @@ h1,h2,h3,h4,h5 {
   transition: var(--transition);
 }
 
-.navbar.scrolled {
+.navbar.scrolled,
+.navbar.navbar-solid {
   background: rgba(13,27,42,0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -697,6 +698,107 @@ h1,h2,h3,h4,h5 {
   max-width: 480px;
   line-height: 1.75;
 }
+/* 
+.hero-value-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0 auto 24px;
+  max-width: 1000px;
+}
+
+.hero-value-item {
+  display: block;
+  text-align: left;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(200,164,106,0.28);
+  border-radius: 12px;
+  padding: 14px 14px 15px;
+  transition: var(--transition);
+}
+
+.hero-value-item:hover {
+  border-color: rgba(229,201,124,0.62);
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
+
+.hero-value-kicker {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+}
+
+.hero-value-item p {
+  color: rgba(255,255,255,0.78);
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+
+.hero-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0 auto 34px;
+  max-width: 1000px;
+}
+
+.hero-step-card {
+  text-align: left;
+  background: rgba(13,27,42,0.55);
+  border: 1px solid rgba(200,164,106,0.26);
+  border-radius: 14px;
+  padding: 18px 18px 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.hero-step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(229,201,124,0.58);
+  color: var(--gold-light);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.hero-step-card h3 {
+  font-size: 1.28rem;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.hero-step-card p {
+  color: rgba(255,255,255,0.76);
+  line-height: 1.65;
+  font-size: 0.94rem;
+  margin-bottom: 10px;
+}
+
+.hero-step-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.hero-step-link:hover {
+  color: var(--gold);
+  gap: 10px;
+} */
 
 .hero-tagline {
   font-family: 'Cormorant Garamond', serif;
@@ -2780,6 +2882,11 @@ h1,h2,h3,h4,h5 {
   .hero-content { grid-template-columns: 1fr; gap: 40px; text-align: center; }
   .hero-eyebrow { justify-content: center; }
   .hero-desc { margin: 0 auto 40px; }
+  /* .hero-value-strip,
+  .hero-steps {
+    grid-template-columns: 1fr;
+    max-width: 680px;
+  } */
   .hero-buttons { justify-content: center; }
   .hero-stats { justify-content: center; }
   .hero-visual { justify-content: center; }
@@ -2852,6 +2959,11 @@ h1,h2,h3,h4,h5 {
   .hamburger.active span:nth-child(2) { opacity: 0; }
   .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
   .services-grid { grid-template-columns: 1fr; }
+  /* .hero-value-item,
+  .hero-step-card {
+    padding: 14px 14px 13px;
+  }
+  .hero-step-card h3 { font-size: 1.2rem; } */
   .featured-case-card { padding: 30px 24px; }
   .featured-case-card h3 { font-size: 1.6rem; }
   .lynchpin-visual { min-height: 320px; }
@@ -2937,8 +3049,12 @@ h1,h2,h3,h4,h5 {
 }
 
 .hero-content--single .hero-eyebrow { justify-content: center; }
+/* .hero-content--single .hero-title { white-space: nowrap; } */
 .hero-content--single .hero-intro { margin: 0 auto 18px; }
-.hero-content--single .hero-desc { margin: 0 auto 40px; }
+.hero-content--single .hero-desc {
+  margin: 0 auto 40px;
+  /* max-width: 760px; */
+}
 .hero-content--single .hero-buttons { justify-content: center; }
 .hero-content--single .hero-stats { justify-content: center; }
 
@@ -3871,6 +3987,11 @@ h1,h2,h3,h4,h5 {
   object-fit: cover;
 }
 
+/* Keep the head visible on founder photo 4 by biasing crop to the top. */
+.founder-main-gallery .founder-slide[data-slide-index="3"] img {
+  object-position: center top;
+}
+
 .founder-main-gallery .founder-slider-btn {
   position: absolute;
   top: 50%;
@@ -4203,6 +4324,7 @@ h1,h2,h3,h4,h5 {
 @media (max-width: 480px) {
   .logo-chip { min-width: 130px; padding: 14px 20px; height: 64px; }
   .team-members-grid { grid-template-columns: 1fr; }
+  /* .hero-content--single .hero-title { white-space: normal; } */
 }
 /* Founder In The Field */
 

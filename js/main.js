@@ -699,6 +699,99 @@ document.addEventListener('DOMContentLoaded', () => {
     startAutoplay();
   });
 
+  /* ---- Event carousels (Services page) ---- */
+  const eventCarousels = document.querySelectorAll('.event-carousel');
+
+  eventCarousels.forEach((carousel) => {
+    const slides = carousel.querySelectorAll('.event-slide');
+    const dots = carousel.querySelectorAll('.event-carousel-dot');
+    const prevBtn = carousel.querySelector('.event-carousel-btn.prev');
+    const nextBtn = carousel.querySelector('.event-carousel-btn.next');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!slides.length) return;
+
+    let currentIndex = 0;
+    let autoplayTimer = null;
+    const interval = Number(carousel.dataset.interval) || 3200;
+
+    const setSlide = (index) => {
+      currentIndex = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle('active', slideIndex === currentIndex);
+      });
+
+      dots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === currentIndex;
+        dot.classList.toggle('active', isActive);
+        dot.setAttribute('aria-selected', String(isActive));
+      });
+
+      if (!reducedMotion) {
+        const activeSlide = slides[currentIndex];
+        const activeImage = activeSlide ? activeSlide.querySelector('img') : null;
+        if (activeImage && typeof activeImage.animate === 'function') {
+          activeImage.animate(
+            [
+              { opacity: 0.78, transform: 'scale(0.985)' },
+              { opacity: 1, transform: 'scale(1)' }
+            ],
+            {
+              duration: 320,
+              easing: 'cubic-bezier(0.22, 1, 0.36, 1)'
+            }
+          );
+        }
+      }
+    };
+
+    const stopAutoplay = () => {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    };
+
+    const startAutoplay = () => {
+      if (slides.length < 2) return;
+      stopAutoplay();
+      autoplayTimer = setInterval(() => setSlide(currentIndex + 1), interval);
+    };
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        setSlide(currentIndex - 1);
+        startAutoplay();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        setSlide(currentIndex + 1);
+        startAutoplay();
+      });
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const nextIndex = Number(dot.dataset.slide);
+        if (!Number.isNaN(nextIndex)) {
+          setSlide(nextIndex);
+          startAutoplay();
+        }
+      });
+    });
+
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+    carousel.addEventListener('focusin', stopAutoplay);
+    carousel.addEventListener('focusout', startAutoplay);
+
+    setSlide(0);
+    startAutoplay();
+  });
+
 //Case Studies
     // Hamburger menu
     document.addEventListener('DOMContentLoaded', function() {
