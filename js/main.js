@@ -4,6 +4,19 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ---- Global floating Calendly CTA ---- */
+  const calendlyUrl = 'https://calendly.com/thelynchpinconsultants';
+  if (!document.querySelector('.floating-calendly-cta')) {
+    const floatingCta = document.createElement('a');
+    floatingCta.className = 'floating-calendly-cta';
+    floatingCta.href = calendlyUrl;
+    floatingCta.target = '_blank';
+    floatingCta.rel = 'noopener';
+    floatingCta.setAttribute('aria-label', 'Book a strategy conversation on Calendly');
+    floatingCta.innerHTML = '<i class="far fa-calendar-check" aria-hidden="true"></i><span>Book Strategy Call</span>';
+    document.body.appendChild(floatingCta);
+  }
+
   /* ---- Intro section refresh reveal ---- */
   const introSection = document.querySelector('.intro-statement-section');
   if (introSection) {
@@ -378,14 +391,19 @@ document.addEventListener('DOMContentLoaded', () => {
       hamburger.classList.toggle('active');
       navLinks.classList.toggle('open');
       document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+      if (!navLinks.classList.contains('open') && servicesDropdown) {
+        servicesDropdown.classList.remove('open');
+      }
     });
 
     const servicesDropdown = navLinks.querySelector('.nav-dropdown');
     const servicesTrigger = servicesDropdown ? servicesDropdown.querySelector(':scope > a') : null;
+    const isCompactNav = () => window.matchMedia('(max-width: 1024px)').matches;
     if (servicesDropdown && servicesTrigger) {
       servicesTrigger.addEventListener('click', (e) => {
-        if (window.matchMedia('(max-width: 768px)').matches) {
+        if (isCompactNav()) {
           e.preventDefault();
+          e.stopPropagation();
           servicesDropdown.classList.toggle('open');
         }
       });
@@ -394,6 +412,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close menu on link click
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
+        if (link === servicesTrigger && isCompactNav()) {
+          return;
+        }
         hamburger.classList.remove('active');
         navLinks.classList.remove('open');
         document.body.style.overflow = '';
