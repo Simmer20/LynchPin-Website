@@ -380,12 +380,24 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
     });
 
+    const servicesDropdown = navLinks.querySelector('.nav-dropdown');
+    const servicesTrigger = servicesDropdown ? servicesDropdown.querySelector(':scope > a') : null;
+    if (servicesDropdown && servicesTrigger) {
+      servicesTrigger.addEventListener('click', (e) => {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+          e.preventDefault();
+          servicesDropdown.classList.toggle('open');
+        }
+      });
+    }
+
     // Close menu on link click
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         navLinks.classList.remove('open');
         document.body.style.overflow = '';
+        if (servicesDropdown) servicesDropdown.classList.remove('open');
       });
     });
 
@@ -395,6 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.classList.remove('active');
         navLinks.classList.remove('open');
         document.body.style.overflow = '';
+        if (servicesDropdown) servicesDropdown.classList.remove('open');
       }
     });
   }
@@ -472,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ---- Interactive depth hover for cards ---- */
-  const depthCards = document.querySelectorAll('.pathway-card, .region-card, .partner-card, .contact-booking-card');
+  const depthCards = document.querySelectorAll('.pathway-card, .region-card, .partner-card, .contact-booking-card, .page-hero .about-card');
   depthCards.forEach((card) => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
