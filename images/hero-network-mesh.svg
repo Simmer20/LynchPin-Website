@@ -1,0 +1,49 @@
+<svg width="3840" height="2160" viewBox="0 0 3840 2160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="lineGrad" x1="1700" y1="280" x2="3440" y2="1840" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#C89B3C" stop-opacity="0.48"/>
+      <stop offset="0.45" stop-color="#A9BDDA" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#A9BDDA" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="wash" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(3000 980) rotate(90) scale(1180 1620)">
+      <stop offset="0" stop-color="#C89B3C" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#C89B3C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fadeMask" x1="1240" y1="1080" x2="3400" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="black" stop-opacity="0"/>
+      <stop offset="0.35" stop-color="white" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="white" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="rightReveal">
+      <rect width="3840" height="2160" fill="url(#fadeMask)"/>
+    </mask>
+  </defs>
+
+  <rect width="3840" height="2160" fill="url(#wash)" opacity="0.72"/>
+
+  <g stroke="url(#lineGrad)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.56" mask="url(#rightReveal)">
+    <path d="M1920 280 L2330 450 L2220 830 L1810 690 Z"/>
+    <path d="M2220 830 L2590 1000 L2480 1360 L2110 1220 Z"/>
+    <path d="M2480 1360 L2860 1500 L2720 1850 L2340 1710 Z"/>
+    <path d="M2330 450 L2740 620 L2620 990 L2220 830 Z"/>
+    <path d="M2740 620 L3130 800 L3000 1140 L2620 990 Z"/>
+    <path d="M3000 1140 L3380 1290 L3240 1620 L2860 1470 Z"/>
+    <path d="M2860 1470 L3240 1620 L3080 1910 L2720 1790 Z"/>
+
+    <line x1="1810" y1="690" x2="2330" y2="450"/>
+    <line x1="2220" y1="830" x2="2740" y2="620"/>
+    <line x1="2620" y1="990" x2="3130" y2="800"/>
+    <line x1="3000" y1="1140" x2="3380" y2="1290"/>
+    <line x1="2110" y1="1220" x2="2860" y2="1470"/>
+    <line x1="2340" y1="1710" x2="3080" y2="1910"/>
+  </g>
+
+  <g fill="#C89B3C" opacity="0.52" mask="url(#rightReveal)">
+    <circle cx="2220" cy="830" r="3"/>
+    <circle cx="2620" cy="990" r="3"/>
+    <circle cx="3000" cy="1140" r="3"/>
+    <circle cx="2480" cy="1360" r="3"/>
+    <circle cx="2860" cy="1470" r="3"/>
+    <circle cx="2720" cy="1790" r="3"/>
+  </g>
+</svg>

@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvasHost = document.getElementById('introThreeCanvas');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    if (intro && intro.classList.contains('intro-premium-bg')) return;
     if (!intro || !canvasHost || typeof THREE === 'undefined' || reducedMotion) return;
 
     const scene = new THREE.Scene();
@@ -302,6 +303,132 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   initThreeHeroScroll();
+
+  /* ---- Three.js inner page hero particles (About hero) ---- */
+  const initAboutHeroThree = () => {
+    const hero = document.querySelector('.page-hero');
+    const canvasHost = document.getElementById('aboutHeroThreeCanvas');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (hero && hero.classList.contains('premium-hero-bg')) return;
+    if (!hero || !canvasHost || typeof THREE === 'undefined' || reducedMotion) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(54, 1, 0.1, 100);
+    camera.position.set(0, 0, 8.2);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.7));
+    canvasHost.appendChild(renderer.domElement);
+
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particleCount = 980;
+    const positions = new Float32Array(particleCount * 3);
+    const scales = new Float32Array(particleCount);
+
+    for (let i = 0; i < particleCount; i += 1) {
+      const i3 = i * 3;
+      positions[i3] = (Math.random() - 0.5) * 22;
+      positions[i3 + 1] = (Math.random() - 0.5) * 14;
+      positions[i3 + 2] = (Math.random() - 0.5) * 16;
+      scales[i] = Math.random();
+    }
+
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    const particles = new THREE.Points(
+      particlesGeometry,
+      new THREE.PointsMaterial({
+        color: 0xf5edd8,
+        size: 0.07,
+        transparent: true,
+        opacity: 0.72,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    scene.add(particles);
+
+    const goldGeometry = new THREE.BufferGeometry();
+    const goldCount = 260;
+    const goldPositions = new Float32Array(goldCount * 3);
+    for (let i = 0; i < goldCount; i += 1) {
+      const i3 = i * 3;
+      goldPositions[i3] = (Math.random() - 0.5) * 16;
+      goldPositions[i3 + 1] = (Math.random() - 0.5) * 10;
+      goldPositions[i3 + 2] = (Math.random() - 0.5) * 12;
+    }
+    goldGeometry.setAttribute('position', new THREE.BufferAttribute(goldPositions, 3));
+
+    const goldParticles = new THREE.Points(
+      goldGeometry,
+      new THREE.PointsMaterial({
+        color: 0xc8a46a,
+        size: 0.11,
+        transparent: true,
+        opacity: 0.3,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    scene.add(goldParticles);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.34));
+    const point = new THREE.PointLight(0xe5c97c, 14, 22);
+    point.position.set(4, 3, 5);
+    scene.add(point);
+
+    const pointer = { x: 0, y: 0 };
+
+    const resize = () => {
+      const bounds = hero.getBoundingClientRect();
+      const w = Math.max(bounds.width, 1);
+      const h = Math.max(bounds.height, 1);
+      renderer.setSize(w, h);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    };
+
+    const onPointerMove = (e) => {
+      pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
+    };
+
+    const clock = new THREE.Clock();
+    const tick = () => {
+      const elapsed = clock.getElapsedTime();
+
+      const pos = particlesGeometry.attributes.position.array;
+      for (let i = 0; i < particleCount; i += 1) {
+        const i3 = i * 3;
+        pos[i3 + 1] += 0.0026 + scales[i] * 0.0011;
+        pos[i3] += Math.sin(elapsed * 0.2 + i) * 0.00035;
+        if (pos[i3 + 1] > 7.4) {
+          pos[i3 + 1] = -7.4;
+        }
+      }
+      particlesGeometry.attributes.position.needsUpdate = true;
+
+      particles.rotation.y = elapsed * 0.015;
+      particles.rotation.x = elapsed * 0.006;
+      goldParticles.rotation.y = -elapsed * 0.011;
+      goldParticles.rotation.x = Math.sin(elapsed * 0.23) * 0.06;
+
+      camera.position.x += ((pointer.x * 0.26) - camera.position.x) * 0.03;
+      camera.position.y += ((-pointer.y * 0.2) - camera.position.y) * 0.03;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    tick();
+  };
+
+  initAboutHeroThree();
 
   /* ---- Three.js CTA ambient particles ---- */
   const initCtaThreeFx = () => {
@@ -731,6 +858,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setSlide(0);
     startAutoplay();
+  });
+
+  /* ---- Keep wheel scrolling inside advisory package cards ---- */
+  const packagePanels = document.querySelectorAll('.flip-card-front, .flip-card-back');
+
+  packagePanels.forEach((panel) => {
+    panel.addEventListener('wheel', (event) => {
+      const hasOverflow = panel.scrollHeight > panel.clientHeight + 1;
+      if (!hasOverflow) return;
+
+      const scrollingUp = event.deltaY < 0;
+      const atTop = panel.scrollTop <= 0;
+      const atBottom = panel.scrollTop + panel.clientHeight >= panel.scrollHeight - 1;
+
+      // Prevent page scroll chaining when the pointer is over package content.
+      event.preventDefault();
+
+      if ((scrollingUp && atTop) || (!scrollingUp && atBottom)) {
+        return;
+      }
+
+      panel.scrollTop += event.deltaY;
+    }, { passive: false });
   });
 
   /* ---- Event carousels (Services page) ---- */
