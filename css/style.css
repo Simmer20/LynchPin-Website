@@ -6134,6 +6134,18 @@ max-width:120px;
   -webkit-backdrop-filter: blur(8px);
 }
 
+.premium-hero-bg .about-card.gold-card {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  border-color: rgba(229,201,124,0.72);
+  box-shadow: 0 20px 38px rgba(13,27,42,0.24), inset 0 1px 0 rgba(255,255,255,0.22);
+}
+
+.premium-hero-bg .about-card.gold-card h3,
+.premium-hero-bg .about-card.gold-card p,
+.premium-hero-bg .about-card.gold-card .card-icon {
+  color: var(--navy-dark);
+}
+
 .page-hero.premium-hero-bg .page-hero-three-canvas,
 .page-hero.premium-hero-bg .page-hero-three-overlay {
   display: none;
